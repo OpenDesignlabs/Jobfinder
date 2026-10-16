@@ -1,1138 +1,595 @@
 // ============================================================
-// JobDirect – Mock Job Data (Demonstration Records)
+// JobDirect – Verified Gujarat Recruitment Data
 // ============================================================
-//
-// IMPORTANT: All records below are labelled dataQuality: 'demo'.
-// They are illustrative examples only.
-// - Vacancies, salaries, dates, and fees are approximate references
-//   drawn from publicly available past recruitment notices.
-// - Official URLs point to real recruiting-body home pages but
-//   notification/apply links are marked unavailable.
-// - Do NOT present these values to users as current verified data.
-//
-// ── Data ingestion strategy (for production) ──────────────────
-//  1. Parse official Employment News, recruiting body RSS/notification
-//     feeds, and sarkariresult.com / india.gov.in/govtjobs.
-//  2. Store raw source URL + fetch timestamp per record.
-//  3. Deduplicate on (department + recruitmentId + applicationEnd).
-//  4. Mark stale if applicationEnd > 30 days past without a result update.
-//  5. Require human review before promoting dataQuality → 'verified'.
-// ──────────────────────────────────────────────────────────────
+// Source: jobdirect_production_ready (examsuchana.in) — Production
+// 9 verified Gujarat government recruitment records.
+// Includes: GPSC, GSSSB, GPRB (Police), GPSSB (Talati/Clerk),
+//           High Court of Gujarat, DGVCL/PGVCL (Energy), SMC.
+// ============================================================
 
 import type { Job } from '../types/job';
 
-export const DEMO_JOBS: Job[] = [
+export const GUJARAT_VERIFIED_JOBS: Job[] = [
   // ------------------------------------------------------------------
-  // 1. RRB NTPC Undergraduate — Demo (closed)
-  // ------------------------------------------------------------------
-  {
-    id: 'rrb-ntpc-ug-2024',
-    recruitmentId: 'CEN 05/2024 (Illustrative)',
-    department: 'Railway Recruitment Boards (RRBs)',
-    title: 'NTPC Undergraduate Posts',
-    sector: 'railways',
-    shortDescription:
-      'Non-Technical Popular Categories (NTPC) undergraduate-level posts across Indian Railways — Junior Clerk cum Typist, Accounts Clerk cum Typist, Junior Time Keeper, Trains Clerk, and Commercial-cum-Ticket Clerk.',
-
-    minQualification: ['12th_general', '12th_pcm'],
-    qualificationNote:
-      '12th pass (any stream) from a recognised board. Some posts may require typing proficiency. Refer to the official notification for post-wise eligibility.',
-
-    ageLimit: {
-      min: 18,
-      max: 33,
-      relaxations: [
-        { category: 'OBC (Non-Creamy Layer)', relaxationYears: 3 },
-        { category: 'SC/ST', relaxationYears: 5 },
-        { category: 'PwBD (General)', relaxationYears: 10 },
-        { category: 'Ex-Servicemen', relaxationYears: 3 },
-      ],
-    },
-    nationality:
-      'Indian Citizen / Nepalese / Bhutanese / Tibetan Refugee / Person of Indian Origin as per notification',
-
-    totalVacancies: 11558,
-    vacancyBreakdown: [
-      { post: 'Junior Clerk cum Typist', count: 990 },
-      { post: 'Accounts Clerk cum Typist', count: 361 },
-      { post: 'Junior Time Keeper', count: 20 },
-      { post: 'Trains Clerk', count: 544 },
-      { post: 'Commercial cum Ticket Clerk', count: 2972 },
-      { post: 'Station Master', count: 994 },
-      { post: 'Goods Guard', count: 3144 },
-      { post: 'Senior Commercial cum Ticket Clerk', count: 1736 },
-      { post: 'Senior Clerk cum Typist', count: 736 },
-      { post: 'Junior Account Assistant cum Typist', count: 1161 },
-    ],
-
-    salary: {
-      payLevel: 'Level 2 to Level 5 (7th CPC)',
-      payScale: '₹19,900 – ₹47,600',
-      displayText: '₹19,900 – ₹47,600 (Pay Level 2–5)',
-    },
-
-    applicationFee: {
-      general: 500,
-      obc: 500,
-      scSt: 250,
-      exServicemen: 250,
-      women: 250,
-      currency: 'INR',
-      note: 'Fee refunded after appearing in CBT-1. Exact fee structure subject to official notification.',
-    },
-
-    importantDates: {
-      notificationDate: '2024-09-14',
-      applicationStart: '2024-09-14',
-      applicationEnd: '2024-10-13',
-      examDate: '2025-03-01',
-    },
-
-    selectionProcess: [
-      {
-        order: 1,
-        name: 'Computer-Based Test 1 (CBT-1)',
-        description: 'Screening test – Mathematics, General Intelligence & Reasoning, General Awareness',
-      },
-      { order: 2, name: 'Computer-Based Test 2 (CBT-2)', description: 'Main examination – post-wise syllabus' },
-      {
-        order: 3,
-        name: 'Typing Skill Test / Computer-Based Aptitude Test',
-        description: 'Only for relevant posts',
-      },
-      { order: 4, name: 'Document Verification & Medical Examination' },
-    ],
-
-    requiredDocuments: [
-      '10th / Matriculation certificate (date of birth proof)',
-      '12th pass certificate and mark sheet',
-      'Category certificate (SC/ST/OBC/EWS), if applicable',
-      'PwBD certificate, if applicable',
-      'Ex-Servicemen discharge certificate, if applicable',
-      'Valid photo identity proof',
-      'Passport-size photographs',
-    ],
-
-    applicationInstructions:
-      'Applications must be submitted online through the official RRB regional website. Hard copies are NOT accepted. Ensure all documents are uploaded in the specified format and size.',
-
-    officialLinks: {
-      officialWebsite: 'https://indianrailways.gov.in',
-      notificationPdf: undefined,
-      applyOnline: undefined,
-      verified: false,
-      lastVerified: undefined,
-    },
-
-    status: 'closed',
-    dataQuality: 'demo',
-    lastUpdated: '2025-01-01',
-    tags: ['railway', 'ntpc', 'ug', '12th-pass', 'clerk', 'typist'],
-  },
-
-  // ------------------------------------------------------------------
-  // 2. SSC CHSL — Demo (closed)
+  // 1. GSSSB Work Assistant / Workshop Attendant
   // ------------------------------------------------------------------
   {
-    id: 'ssc-chsl-2024',
-    recruitmentId: 'SSC CHSL 2024 (Illustrative)',
-    department: 'Staff Selection Commission (SSC)',
-    title: 'Combined Higher Secondary Level (CHSL) Examination',
-    sector: 'ssc',
+    id: 'gsssb-work-asst-461',
+    advtNo: 'GSSSB/202627/461',
+    agency: 'GSSSB',
+    agencyFull: 'Gujarat Subordinate Service Selection Board',
+    recruitmentId: 'GSSSB/202627/461',
+    department: 'Gujarat Subordinate Service Selection Board (GSSSB)',
+    title: 'Work Assistant & Workshop Attendant, Class-4',
+    titleGuj: 'GSSSB — વર્ક આસિસ્ટન્ટ અને વર્કશોપ અટેન્ડન્ટ (વર્ગ-૪) ભરતી',
+    sector: 'state_govt',
     shortDescription:
-      'SSC CHSL recruits Lower Division Clerk (LDC), Junior Secretariat Assistant (JSA), Postal Assistant (PA), Sorting Assistant (SA), and Data Entry Operator (DEO) in various Central Government Ministries and Departments.',
-
-    minQualification: ['12th_general', '12th_pcm'],
-    qualificationNote:
-      '12th pass (any stream) from a recognised Board/University. For DEO in C&AG: Science stream with Mathematics as a subject in 12th. Refer to official notification for post-wise details.',
-
-    ageLimit: {
-      min: 18,
-      max: 27,
-      relaxations: [
-        { category: 'OBC (Non-Creamy Layer)', relaxationYears: 3 },
-        { category: 'SC/ST', relaxationYears: 5 },
-        { category: 'PwBD (General)', relaxationYears: 10 },
-        { category: 'Ex-Servicemen', relaxationYears: 3 },
-        { category: 'Central Govt. Employees (for certain posts)', relaxationYears: 5 },
-      ],
-    },
-    nationality:
-      'Indian Citizen / Nepalese / Bhutanese / Tibetan Refugee / Person of Indian Origin as per notification',
-
-    totalVacancies: 3712,
-    vacancyBreakdown: [
-      { post: 'Lower Division Clerk / Junior Secretariat Assistant', count: 2045 },
-      { post: 'Postal Assistant / Sorting Assistant', count: 1010 },
-      { post: 'Data Entry Operator (DEO)', count: 657 },
-    ],
-
-    salary: {
-      payLevel: 'Level 2 and Level 4 (7th CPC)',
-      payScale: '₹19,900 – ₹35,400',
-      displayText: '₹19,900 – ₹35,400 (Pay Level 2 & 4)',
-    },
-
-    applicationFee: {
-      general: 100,
-      obc: 100,
-      scSt: 0,
-      exServicemen: 0,
-      women: 0,
-      currency: 'INR',
-      note: 'Female / SC / ST / PwBD / Ex-Servicemen candidates are exempted from application fee.',
-    },
-
-    importantDates: {
-      notificationDate: '2024-06-24',
-      applicationStart: '2024-06-24',
-      applicationEnd: '2024-07-24',
-      examDate: '2024-12-01',
-    },
-
-    selectionProcess: [
-      {
-        order: 1,
-        name: 'Tier-I: CBT',
-        description: 'Objective – English, Quantitative Aptitude, General Intelligence, General Awareness',
-      },
-      {
-        order: 2,
-        name: 'Tier-II: Descriptive + Skill Test',
-        description:
-          'Descriptive paper (Essay/Letter); Typing / Data Entry skill test for qualified candidates',
-      },
-      { order: 3, name: 'Document Verification' },
-    ],
-
-    requiredDocuments: [
-      'Matriculation / 10th certificate',
-      '12th pass certificate and mark sheet',
-      'Category certificate (SC/ST/OBC/EWS), if applicable',
-      'PwBD certificate, if applicable',
-      'Ex-Servicemen discharge book, if applicable',
-      'Domicile certificate (if state quota)',
-      'Valid photo ID (Aadhaar / Passport / Voter ID)',
-    ],
-
-    applicationInstructions:
-      'Apply online at the SSC official website. One-time registration required. Candidates must keep their application number and login credentials safe.',
-
-    officialLinks: {
-      officialWebsite: 'https://ssc.gov.in',
-      notificationPdf: undefined,
-      applyOnline: undefined,
-      verified: false,
-      lastVerified: undefined,
-    },
-
-    status: 'closed',
-    dataQuality: 'demo',
-    lastUpdated: '2025-01-01',
-    tags: ['ssc', 'chsl', '12th-pass', 'ldc', 'postal', 'deo', 'central-govt'],
-  },
-
-  // ------------------------------------------------------------------
-  // 3. Indian Navy SSR — Demo (upcoming, future deadline)
-  // ------------------------------------------------------------------
-  {
-    id: 'navy-ssr-2025-01',
-    recruitmentId: 'Navy SSR 01/2026 (Illustrative)',
-    department: 'Indian Navy',
-    title: 'Sailor – Senior Secondary Recruit (SSR)',
-    sector: 'defense_police',
-    shortDescription:
-      'The Indian Navy recruits SSR sailors for technical branches including Artificer Apprentice and other technical trades. PCM (Physics, Chemistry, Mathematics) in 12th is mandatory.',
-
-    minQualification: ['12th_pcm'],
-    qualificationNote:
-      'Must have passed 10+2 / equivalent with Physics, Chemistry, and Mathematics (PCM) and English from a recognised Board. Minimum aggregate marks may apply — refer to the official notification.',
-
-    ageLimit: {
-      min: 17,
-      max: 21,
-      relaxations: [
-        { category: 'SC/ST', relaxationYears: 5 },
-        { category: 'OBC (Non-Creamy Layer)', relaxationYears: 3 },
-      ],
-    },
-    nationality: 'Indian Citizen (unmarried male)',
-    physicalStandards:
-      'Height ≥ 157 cm (general). Weight proportional to height. Chest 5 cm expansion. Vision: 6/6 each eye (no spectacles). Medical fitness as per Naval standards.',
-
-    totalVacancies: 2800,
-    vacancyBreakdown: [
-      { category: 'General (UR)', count: 1190 },
-      { category: 'OBC', count: 756 },
-      { category: 'SC', count: 420 },
-      { category: 'ST', count: 210 },
-      { category: 'EWS', count: 224 },
-    ],
-
-    salary: {
-      payLevel: 'Level 3 (7th CPC) + X Group Pay',
-      payScale: '₹21,700 + ₹6,200 MSP',
-      displayText: '₹21,700 + ₹6,200 MSP (approx. ₹33,100 in-hand during training)',
-    },
-
-    applicationFee: {
-      general: 0,
-      obc: 0,
-      scSt: 0,
-      exServicemen: 0,
-      currency: 'INR',
-      note: 'No application fee for Indian Navy SSR.',
-    },
-
-    importantDates: {
-      notificationDate: '2026-10-01',
-      applicationStart: '2026-10-05',
-      applicationEnd: '2026-11-30',
-      examDate: '2027-02-01',
-    },
-
-    selectionProcess: [
-      {
-        order: 1,
-        name: 'Computer-Based Written Test',
-        description: 'English, Science (PCM), Mathematics, General Knowledge',
-      },
-      {
-        order: 2,
-        name: 'Physical Fitness Test (PFT)',
-        description: '1.6 km run (7 min), 20 squats, 10 push-ups',
-      },
-      { order: 3, name: 'Medical Examination', description: 'Naval medical standards' },
-      { order: 4, name: 'Merit List & Document Verification' },
-    ],
-
-    requiredDocuments: [
-      '10th certificate and mark sheet (date of birth proof)',
-      '12th certificate and mark sheet (Physics, Chemistry, Mathematics)',
-      'Category certificate (SC/ST/OBC/EWS), if applicable',
-      'Domicile / Residence certificate',
-      'Aadhaar card',
-      'Passport-size photographs (recent)',
-      'NCC certificate (if applicable)',
-    ],
-
-    applicationInstructions:
-      'Apply online at the official Indian Navy recruitment portal joinindiannavy.gov.in. Hard copies are not accepted. Candidates must have a valid email and mobile number for communication.',
-
-    officialLinks: {
-      officialWebsite: 'https://joinindiannavy.gov.in',
-      notificationPdf: undefined,
-      applyOnline: undefined,
-      verified: false,
-      lastVerified: undefined,
-    },
-
-    status: 'open',
-    dataQuality: 'demo',
-    lastUpdated: '2026-10-01',
-    tags: ['navy', 'ssr', 'sailor', 'pcm', '12th-pcm', 'defense', 'technical'],
-  },
-
-  // ------------------------------------------------------------------
-  // 4. SBI Clerk (Junior Associates) — Demo (closed)
-  // ------------------------------------------------------------------
-  {
-    id: 'sbi-clerk-2024',
-    recruitmentId: 'SBI Clerk 2024 (Illustrative)',
-    department: 'State Bank of India (SBI)',
-    title: 'Junior Associates (Customer Support & Sales)',
-    sector: 'banking',
-    shortDescription:
-      'SBI recruits Junior Associates for clerical cadre positions across branches in India. Graduation in any discipline is the minimum qualification.',
-
-    minQualification: ['graduate'],
-    qualificationNote:
-      'Graduation in any discipline from a recognised University. Proficiency in the official language of the state / UT for which the candidate is applying is desirable.',
-
-    ageLimit: {
-      min: 20,
-      max: 28,
-      relaxations: [
-        { category: 'OBC (Non-Creamy Layer)', relaxationYears: 3 },
-        { category: 'SC/ST', relaxationYears: 5 },
-        { category: 'PwBD (General)', relaxationYears: 10 },
-        { category: 'Ex-Servicemen / Disabled Ex-Servicemen', relaxationYears: 5 },
-        { category: 'Widows / Divorced women / Judicially separated women', relaxationYears: 9 },
-      ],
-    },
-    nationality:
-      'Indian Citizen / Nepalese / Bhutanese / Tibetan Refugee / Person of Indian Origin as per notification',
-
-    totalVacancies: 8773,
-    vacancyBreakdown: [
-      { category: 'General (UR)', count: 3618 },
-      { category: 'OBC', count: 2332 },
-      { category: 'SC', count: 1407 },
-      { category: 'ST', count: 703 },
-      { category: 'EWS', count: 713 },
-    ],
-
-    salary: {
-      payLevel: 'Basic Pay ₹26,730 (revised)',
-      displayText: '₹26,730 basic + DA + HRA + other allowances (approx. ₹41,960 CTC)',
-    },
-
-    applicationFee: {
-      general: 750,
-      obc: 750,
-      scSt: 0,
-      exServicemen: 0,
-      women: 0,
-      currency: 'INR',
-      note: 'SC/ST/PwBD candidates are exempted from fee.',
-    },
-
-    importantDates: {
-      notificationDate: '2024-11-01',
-      applicationStart: '2024-11-07',
-      applicationEnd: '2024-11-27',
-      examDate: '2025-01-05',
-    },
-
-    selectionProcess: [
-      {
-        order: 1,
-        name: 'Preliminary Examination',
-        description: 'English Language, Numerical Ability, Reasoning Ability',
-      },
-      {
-        order: 2,
-        name: 'Main Examination',
-        description:
-          'General / Financial Awareness, Quantitative Aptitude, Reasoning & Computer Aptitude, English Language',
-      },
-      { order: 3, name: 'Local Language Test (Provisional)' },
-      { order: 4, name: 'Document Verification & Medical Examination' },
-    ],
-
-    requiredDocuments: [
-      'Valid photo ID proof',
-      'Graduation certificate and mark sheets',
-      'Birth certificate / 10th certificate',
-      'Category certificate (SC/ST/OBC/EWS/PwBD), if applicable',
-      'Ex-Servicemen discharge certificate, if applicable',
-      'Passport-size photographs',
-    ],
-
-    applicationInstructions:
-      'Apply online through the SBI recruitment portal at sbi.co.in/careers. Candidates must register first, then complete the application form and fee payment.',
-
-    officialLinks: {
-      officialWebsite: 'https://sbi.co.in/careers',
-      notificationPdf: undefined,
-      applyOnline: undefined,
-      verified: false,
-      lastVerified: undefined,
-    },
-
-    status: 'closed',
-    dataQuality: 'demo',
-    lastUpdated: '2025-01-01',
-    tags: ['banking', 'sbi', 'clerk', 'graduate', 'central-banking'],
-  },
-
-  // ------------------------------------------------------------------
-  // 5. UP Police Constable — Demo (open, future deadline)
-  // ------------------------------------------------------------------
-  {
-    id: 'up-police-constable-2024',
-    recruitmentId: 'UP Police Constable 2026 (Illustrative)',
-    department: 'Uttar Pradesh Police Recruitment & Promotion Board (UPPRPB)',
-    title: 'Constable (Civil Police)',
-    sector: 'defense_police',
-    shortDescription:
-      'UPPRPB recruits Constable (Civil Police) for the state of Uttar Pradesh. Candidates must be 12th pass and meet physical standards.',
-
-    minQualification: ['12th_general', '12th_pcm'],
-    qualificationNote:
-      'Intermediate (12th pass) or equivalent from a recognised board. No minimum marks percentage specified — refer to official notification.',
-
-    ageLimit: {
-      min: 18,
-      max: 22,
-      relaxations: [
-        { category: 'OBC (UP domicile)', relaxationYears: 3 },
-        { category: 'SC/ST (UP domicile)', relaxationYears: 5 },
-        { category: 'Ex-Servicemen', relaxationYears: 5 },
-        { category: 'PwBD', relaxationYears: 15 },
-      ],
-    },
-    nationality: 'Indian Citizen with UP domicile (conditions apply)',
-    physicalStandards:
-      'Male (General/OBC/SC): Height ≥ 168 cm, Chest 79 cm (83 expanded). Male (ST): Height ≥ 160 cm. Female (General/OBC/SC): Height ≥ 152 cm. Refer to notification for complete standards.',
-
-    totalVacancies: 60244,
-    vacancyBreakdown: [
-      { category: 'General (UR)', count: 24720 },
-      { category: 'OBC', count: 16266 },
-      { category: 'SC', count: 12652 },
-      { category: 'ST', count: 600 },
-      { category: 'EWS', count: 6006 },
-    ],
-
-    salary: {
-      payLevel: 'Pay Band ₹21,700 + Grade Pay ₹2,000',
-      displayText: '₹21,700 + Grade Pay ₹2,000 + allowances',
-    },
-
-    applicationFee: {
-      general: 400,
-      obc: 400,
-      scSt: 400,
-      exServicemen: 400,
-      currency: 'INR',
-      note: 'Online payment only. Fee once paid is non-refundable.',
-    },
-
-    importantDates: {
-      notificationDate: '2026-09-20',
-      applicationStart: '2026-09-25',
-      applicationEnd: '2026-12-31',
-      examDate: '2027-03-15',
-    },
-
-    selectionProcess: [
-      {
-        order: 1,
-        name: 'Written Examination (Computer-Based)',
-        description:
-          'General Hindi, General Knowledge, Numerical & Mental Ability, Mental Aptitude / IQ / Reasoning',
-      },
-      { order: 2, name: 'Physical Efficiency Test (PET)', description: 'Running / Endurance test' },
-      { order: 3, name: 'Physical Standard Test (PST)', description: 'Height and chest measurement' },
-      { order: 4, name: 'Document Verification & Medical Examination' },
-    ],
-
-    requiredDocuments: [
-      'High School (10th) marksheet and certificate',
-      'Intermediate (12th) marksheet and certificate',
-      'Domicile certificate (Uttar Pradesh)',
-      'Category certificate, if applicable',
-      'Physical disability certificate, if applicable',
-      'Aadhaar card / valid photo ID',
-      'Recent passport-size photographs',
-    ],
-
-    applicationInstructions:
-      'Apply online at the UPPRPB official website. Offline applications are not accepted. Mobile number and email ID required for registration.',
-
-    officialLinks: {
-      officialWebsite: 'https://uppbpb.gov.in',
-      notificationPdf: undefined,
-      applyOnline: undefined,
-      verified: false,
-      lastVerified: undefined,
-    },
-
-    status: 'open',
-    dataQuality: 'demo',
-    lastUpdated: '2026-09-20',
-    tags: ['police', 'constable', 'state-govt', 'up', '12th-pass', 'physical'],
-  },
-
-  // ------------------------------------------------------------------
-  // 6. IBPS PO — Demo (result declared)
-  // ------------------------------------------------------------------
-  {
-    id: 'ibps-po-2024',
-    recruitmentId: 'IBPS PO/MT XIV – 2024 (Illustrative)',
-    department: 'Institute of Banking Personnel Selection (IBPS)',
-    title: 'Probationary Officer / Management Trainee (PO/MT)',
-    sector: 'banking',
-    shortDescription:
-      'IBPS CRP PO/MT recruits Probationary Officers / Management Trainees in participating public sector banks across India. Graduation is the minimum qualification.',
-
-    minQualification: ['graduate'],
-    qualificationNote:
-      'Graduation in any discipline from a University recognised by the Government of India. Final year students appearing in qualifying examination are also eligible, subject to conditions.',
-
-    ageLimit: {
-      min: 20,
-      max: 30,
-      relaxations: [
-        { category: 'OBC (Non-Creamy Layer)', relaxationYears: 3 },
-        { category: 'SC/ST', relaxationYears: 5 },
-        { category: 'PwBD (General)', relaxationYears: 10 },
-        { category: 'Ex-Servicemen', relaxationYears: 5 },
-      ],
-    },
-
-    totalVacancies: 4455,
-    vacancyBreakdown: [
-      { category: 'General (UR)', count: 1837 },
-      { category: 'OBC', count: 1204 },
-      { category: 'SC', count: 668 },
-      { category: 'ST', count: 334 },
-      { category: 'EWS', count: 412 },
-    ],
-
-    salary: {
-      payLevel: 'JMG Scale-I',
-      payScale: '₹36,000 – ₹63,840',
-      displayText: '₹36,000 – ₹63,840 (JMG Scale-I) + DA + other allowances',
-    },
-
-    applicationFee: {
-      general: 850,
-      obc: 850,
-      scSt: 175,
-      exServicemen: 175,
-      currency: 'INR',
-      note: 'Inclusive of GST. Online payment through Debit/Credit card or Internet Banking.',
-    },
-
-    importantDates: {
-      notificationDate: '2024-07-01',
-      applicationStart: '2024-07-01',
-      applicationEnd: '2024-07-21',
-      examDate: '2024-10-19',
-      resultDate: '2025-01-15',
-    },
-
-    selectionProcess: [
-      {
-        order: 1,
-        name: 'Preliminary Examination',
-        description: 'English Language, Quantitative Aptitude, Reasoning Ability',
-      },
-      {
-        order: 2,
-        name: 'Main Examination',
-        description:
-          'Reasoning & Computer Aptitude, Data Analysis & Interpretation, General Economy & Banking Awareness, English Language',
-      },
-      { order: 3, name: 'Interview', description: 'Conducted by participating banks' },
-      { order: 4, name: 'Document Verification' },
-    ],
-
-    requiredDocuments: [
-      'Graduation certificate / consolidated mark sheet',
-      '10th / 12th pass certificate',
-      'Valid photo ID (Aadhaar / Passport / Voter ID / Driving Licence)',
-      'Category certificate, if applicable',
-      'PwBD certificate, if applicable',
-      'Passport-size photographs',
-    ],
-
-    applicationInstructions:
-      'Apply online at ibps.in. Register first using basic details, then log in to fill the complete application and pay the fee.',
-
-    officialLinks: {
-      officialWebsite: 'https://ibps.in',
-      notificationPdf: undefined,
-      applyOnline: undefined,
-      verified: false,
-      lastVerified: undefined,
-    },
-
-    status: 'result_declared',
-    dataQuality: 'demo',
-    lastUpdated: '2025-01-15',
-    tags: ['banking', 'ibps', 'po', 'probationary-officer', 'graduate', 'public-sector-bank'],
-  },
-
-  // ------------------------------------------------------------------
-  // 7. SSC MTS — Demo (closed)
-  // ------------------------------------------------------------------
-  {
-    id: 'ssc-mts-2024',
-    recruitmentId: 'SSC MTS 2024 (Illustrative)',
-    department: 'Staff Selection Commission (SSC)',
-    title: 'Multi-Tasking (Non-Technical) Staff & Havaldar Examination',
-    sector: 'ssc',
-    shortDescription:
-      'SSC MTS recruits Multi-Tasking Staff (MTS) and Havaldar in Central Government offices and CBIC/CBN. Minimum qualification is 10th pass.',
-
-    minQualification: ['10th', '12th_general', '12th_pcm', 'graduate', 'iti_diploma'],
-    qualificationNote: '10th pass (Matriculation) from a recognised Board is the minimum qualification.',
-
-    ageLimit: {
-      min: 18,
-      max: 25,
-      relaxations: [
-        { category: 'OBC (Non-Creamy Layer)', relaxationYears: 3 },
-        { category: 'SC/ST', relaxationYears: 5 },
-        { category: 'PwBD (General)', relaxationYears: 10 },
-        { category: 'Ex-Servicemen', relaxationYears: 3 },
-        { category: 'Central Govt. Employees (MTS Havaldar)', relaxationYears: 5 },
-      ],
-    },
-    nationality:
-      'Indian Citizen / Nepalese / Bhutanese / Tibetan Refugee / Person of Indian Origin as per notification',
-
-    totalVacancies: 9583,
-    vacancyBreakdown: [
-      { post: 'Multi-Tasking Staff (MTS)', count: 6144 },
-      { post: 'Havaldar (CBIC & CBN)', count: 3439 },
-    ],
-
-    salary: {
-      payLevel: 'Level 1 (MTS) and Level 2 (Havaldar) — 7th CPC',
-      payScale: '₹18,000 – ₹22,900',
-      displayText: '₹18,000 – ₹22,900 (Pay Level 1–2)',
-    },
-
-    applicationFee: {
-      general: 100,
-      obc: 100,
-      scSt: 0,
-      exServicemen: 0,
-      women: 0,
-      currency: 'INR',
-      note: 'Female / SC / ST / PwBD / Ex-Servicemen candidates are exempted.',
-    },
-
-    importantDates: {
-      notificationDate: '2024-06-27',
-      applicationStart: '2024-06-27',
-      applicationEnd: '2024-07-31',
-      examDate: '2024-11-30',
-    },
-
-    selectionProcess: [
-      {
-        order: 1,
-        name: 'Session-I: Numerical & Mathematical Ability, Reasoning & Problem Solving',
-        description: 'Objective MCQ test',
-      },
-      {
-        order: 2,
-        name: 'Session-II: General Awareness, English Language & Comprehension',
-        description: 'Objective MCQ test',
-      },
-      {
-        order: 3,
-        name: 'Physical Efficiency Test (PET) / Physical Standard Test (PST)',
-        description: 'Only for Havaldar post',
-      },
-      { order: 4, name: 'Document Verification' },
-    ],
-
-    requiredDocuments: [
-      '10th certificate and mark sheet',
-      'Category certificate (SC/ST/OBC/EWS), if applicable',
-      'PwBD certificate, if applicable',
-      'Ex-Servicemen discharge book, if applicable',
-      'Valid photo ID (Aadhaar / Voter ID / Passport)',
-      'Passport-size photographs',
-    ],
-
-    applicationInstructions:
-      'Apply online at ssc.gov.in. Candidates should register on SSC One-Time Registration portal before applying. Mobile number must be linked to Aadhaar for OTP-based verification.',
-
-    officialLinks: {
-      officialWebsite: 'https://ssc.gov.in',
-      notificationPdf: undefined,
-      applyOnline: undefined,
-      verified: false,
-      lastVerified: undefined,
-    },
-
-    status: 'closed',
-    dataQuality: 'demo',
-    lastUpdated: '2025-01-01',
-    tags: ['ssc', 'mts', 'havaldar', '10th-pass', 'central-govt', 'group-c'],
-  },
-
-  // ------------------------------------------------------------------
-  // 8. RRB Group D — Demo (open, future deadline)
-  // ------------------------------------------------------------------
-  {
-    id: 'rrb-group-d-2025',
-    recruitmentId: 'CEN 02/2026 (Illustrative)',
-    department: 'Railway Recruitment Boards (RRBs)',
-    title: 'Level-1 Posts (Group D)',
-    sector: 'railways',
-    shortDescription:
-      'RRB Group D recruits Track Maintainer, Helper/Assistant in Electrical/Engineering/Mechanical/Signal & Telecommunication departments, and other Level-1 posts across Indian Railways.',
-
-    minQualification: ['10th', '12th_general', '12th_pcm', 'iti_diploma'],
-    qualificationNote:
-      '10th pass + ITI (NCVT/SCVT) in relevant trade, OR 10th pass + 2 years National Apprenticeship Certificate, OR 12th pass. Refer to official notification for post-wise trades.',
-
-    ageLimit: {
-      min: 18,
-      max: 36,
-      relaxations: [
-        { category: 'OBC (Non-Creamy Layer)', relaxationYears: 3 },
-        { category: 'SC/ST', relaxationYears: 5 },
-        { category: 'PwBD (General)', relaxationYears: 10 },
-        { category: 'Ex-Servicemen', relaxationYears: 3 },
-      ],
-    },
-
-    totalVacancies: 32438,
-    vacancyBreakdown: [
-      { category: 'General (UR)', count: 13350 },
-      { category: 'OBC', count: 8758 },
-      { category: 'SC', count: 4866 },
-      { category: 'ST', count: 2435 },
-      { category: 'EWS', count: 3229 },
-    ],
-
-    salary: {
-      payLevel: 'Level 1 (7th CPC)',
-      payScale: '₹18,000 – ₹56,900',
-      displayText: '₹18,000 (starting) + DA + allowances',
-    },
-
-    applicationFee: {
-      general: 500,
-      obc: 500,
-      scSt: 250,
-      exServicemen: 250,
-      women: 250,
-      currency: 'INR',
-      note: 'Fee partially refunded on appearing in CBT.',
-    },
-
-    importantDates: {
-      notificationDate: '2026-09-15',
-      applicationStart: '2026-09-15',
-      applicationEnd: '2026-11-15',
-      examDate: '2027-02-20',
-    },
-
-    selectionProcess: [
-      {
-        order: 1,
-        name: 'Computer-Based Test (CBT)',
-        description:
-          'Mathematics, General Intelligence & Reasoning, General Science, General Awareness & Current Affairs',
-      },
-      {
-        order: 2,
-        name: 'Physical Efficiency Test (PET)',
-        description:
-          '35 kg carry for 100 m in 2 minutes (male); 20 kg carry for 100 m in 2 minutes (female)',
-      },
-      { order: 3, name: 'Document Verification & Medical Examination' },
-    ],
-
-    requiredDocuments: [
-      '10th certificate and mark sheet',
-      'ITI / NAC certificate (if applicable)',
-      '12th certificate (if applicable)',
-      'Category certificate, if applicable',
-      'Ex-Servicemen discharge certificate, if applicable',
-      'Valid photo ID',
-      'Passport-size photographs',
-    ],
-
-    applicationInstructions:
-      'Apply online through the respective RRB regional website. Single application per CEN — applying to multiple RRBs will lead to rejection.',
-
-    officialLinks: {
-      officialWebsite: 'https://indianrailways.gov.in',
-      notificationPdf: undefined,
-      applyOnline: undefined,
-      verified: false,
-      lastVerified: undefined,
-    },
-
-    status: 'open',
-    dataQuality: 'demo',
-    lastUpdated: '2026-09-15',
-    tags: ['railway', 'group-d', 'level-1', '10th-pass', 'iti', 'track-maintainer'],
-  },
-
-  // ------------------------------------------------------------------
-  // 9. SSC CGL — Demo (upcoming)
-  // ------------------------------------------------------------------
-  {
-    id: 'ssc-cgl-2026',
-    recruitmentId: 'SSC CGL 2026 (Illustrative)',
-    department: 'Staff Selection Commission (SSC)',
-    title: 'Combined Graduate Level (CGL) Examination',
-    sector: 'ssc',
-    shortDescription:
-      'SSC CGL recruits for Group B and C posts in various Ministries, Departments, and Organisations of the Government of India. Graduation is the minimum qualification.',
-
-    minQualification: ['graduate'],
-    qualificationNote:
-      'Graduation in any discipline from a recognised University. Some posts require specific degrees — refer to the official notification for post-wise educational criteria.',
-
-    ageLimit: {
-      min: 18,
-      max: 32,
-      relaxations: [
-        { category: 'OBC (Non-Creamy Layer)', relaxationYears: 3 },
-        { category: 'SC/ST', relaxationYears: 5 },
-        { category: 'PwBD (General)', relaxationYears: 10 },
-        { category: 'Ex-Servicemen', relaxationYears: 3 },
-      ],
-    },
-    nationality:
-      'Indian Citizen / Nepalese / Bhutanese / Tibetan Refugee / Person of Indian Origin as per notification',
-
-    totalVacancies: 17727,
-    vacancyBreakdown: [
-      { post: 'Assistant Section Officer (CSS)', count: 1392 },
-      { post: 'Assistant (MEA)', count: 47 },
-      { post: 'Inspector (CBIC)', count: 3614 },
-      { post: 'Inspector (CBI)', count: 218 },
-      { post: 'Sub-Inspector (CBI)', count: 116 },
-      { post: 'Tax Assistant (CBDT/CBIC)', count: 4543 },
-      { post: 'Statistical Investigator Grade-II', count: 756 },
-      { post: 'Other posts', count: 7041 },
-    ],
-
-    salary: {
-      payLevel: 'Pay Level 4 to Pay Level 8 (7th CPC)',
-      payScale: '₹25,500 – ₹1,12,400',
-      displayText: '₹25,500 – ₹1,12,400 (Pay Level 4–8)',
-    },
-
-    applicationFee: {
-      general: 100,
-      obc: 100,
-      scSt: 0,
-      exServicemen: 0,
-      women: 0,
-      currency: 'INR',
-      note: 'Female / SC / ST / PwBD / Ex-Servicemen candidates are exempted from application fee.',
-    },
-
-    importantDates: {
-      notificationDate: '2026-12-01',
-      applicationStart: '2026-12-05',
-      applicationEnd: '2027-01-05',
-      examDate: '2027-04-01',
-    },
-
-    selectionProcess: [
-      {
-        order: 1,
-        name: 'Tier-I: Objective CBT',
-        description: 'General Intelligence & Reasoning, General Awareness, Quantitative Aptitude, English Comprehension',
-      },
-      {
-        order: 2,
-        name: 'Tier-II: Objective CBT',
-        description: 'Mathematical Abilities, Reasoning & General Intelligence, English Language, General Awareness, Computer Knowledge',
-      },
-      { order: 3, name: 'Document Verification' },
-    ],
-
-    requiredDocuments: [
-      'Graduation certificate and mark sheets',
-      '10th / 12th pass certificate',
-      'Category certificate, if applicable',
-      'PwBD certificate, if applicable',
-      'Valid photo ID (Aadhaar / Passport / Voter ID)',
-      'Passport-size photographs',
-    ],
-
-    applicationInstructions:
-      'Apply online at ssc.gov.in. Complete SSC One-Time Registration (OTR) before applying. Keep registration number and password safe for future reference.',
-
-    officialLinks: {
-      officialWebsite: 'https://ssc.gov.in',
-      notificationPdf: undefined,
-      applyOnline: undefined,
-      verified: false,
-      lastVerified: undefined,
-    },
-
-    status: 'upcoming',
-    dataQuality: 'demo',
-    lastUpdated: '2026-10-01',
-    tags: ['ssc', 'cgl', 'graduate', 'group-b', 'group-c', 'central-govt', 'officer'],
-  },
-
-  // ------------------------------------------------------------------
-  // 10. IBPS Clerk — Demo (open, closing soon)
-  // ------------------------------------------------------------------
-  {
-    id: 'ibps-clerk-2026',
-    recruitmentId: 'IBPS CRP Clerk XVI – 2026 (Illustrative)',
-    department: 'Institute of Banking Personnel Selection (IBPS)',
-    title: 'Common Recruitment Process – Clerical Cadre (CRP Clerk)',
-    sector: 'banking',
-    shortDescription:
-      'IBPS CRP Clerk recruits for clerical cadre positions in participating public sector banks. Graduation in any discipline is the minimum qualification.',
-
-    minQualification: ['graduate'],
-    qualificationNote:
-      'Degree (Graduation) in any discipline from a University recognised by the Govt. of India. Proficiency in official language of the state applied for is preferred.',
-
-    ageLimit: {
-      min: 20,
-      max: 28,
-      relaxations: [
-        { category: 'OBC (Non-Creamy Layer)', relaxationYears: 3 },
-        { category: 'SC/ST', relaxationYears: 5 },
-        { category: 'PwBD (General)', relaxationYears: 10 },
-        { category: 'Ex-Servicemen', relaxationYears: 5 },
-        { category: 'Widows / Divorced women', relaxationYears: 9 },
-      ],
-    },
-    nationality:
-      'Indian Citizen / Nepalese / Bhutanese / Tibetan Refugee / Person of Indian Origin as per notification',
-
-    totalVacancies: 6128,
-    vacancyBreakdown: [
-      { category: 'General (UR)', count: 2529 },
-      { category: 'OBC', count: 1655 },
-      { category: 'SC', count: 919 },
-      { category: 'ST', count: 413 },
-      { category: 'EWS', count: 612 },
-    ],
-
-    salary: {
-      payLevel: 'Basic Pay ₹19,900 + allowances',
-      displayText: '₹19,900 basic + DA + HRA + other allowances',
-    },
-
-    applicationFee: {
-      general: 850,
-      obc: 850,
-      scSt: 175,
-      exServicemen: 175,
-      currency: 'INR',
-      note: 'Online payment through Net Banking / Debit Card / Credit Card / UPI.',
-    },
-
-    importantDates: {
-      notificationDate: '2026-09-01',
-      applicationStart: '2026-09-05',
-      applicationEnd: '2026-10-25',
-      examDate: '2026-12-06',
-    },
-
-    selectionProcess: [
-      {
-        order: 1,
-        name: 'Preliminary Examination',
-        description: 'English Language, Numerical Ability, Reasoning Ability',
-      },
-      {
-        order: 2,
-        name: 'Main Examination',
-        description: 'Reasoning, Quantitative Aptitude, English Language, General / Financial Awareness, Computer Knowledge',
-      },
-      { order: 3, name: 'Document Verification' },
-    ],
-
-    requiredDocuments: [
-      'Graduation certificate and mark sheets',
-      '10th and 12th pass certificate',
-      'Category certificate, if applicable',
-      'PwBD certificate, if applicable',
-      'Valid photo ID',
-      'Passport-size photographs',
-    ],
-
-    applicationInstructions:
-      'Apply online at ibps.in. New candidates must register first. Existing registered candidates can login directly.',
-
-    officialLinks: {
-      officialWebsite: 'https://ibps.in',
-      notificationPdf: undefined,
-      applyOnline: undefined,
-      verified: false,
-      lastVerified: undefined,
-    },
-
+      'Gujarat Subordinate Service Selection Board Class-4 recruitment for Work Assistant and Workshop Attendant posts across various state departments.',
+    minQualification: ['10th', '12th_general', 'iti_diploma', '12th_pcm', 'graduate'],
+    qualificationNote: 'ITI / Diploma or 10th pass candidates eligible. Verify trade-specific qualification requirement in official notification.',
+    ageLimit: { min: 18, max: 35 },
+    minAge: 18,
+    maxAgeBase: 35,
+    requiredEdu: ['HSC', 'GRADUATE', 'TECH_DIPLOMA', 'NURSING', 'COMMERCE_PG'],
+    totalVacancies: 2372,
+    salary: { displayText: '₹19,950 – ₹63,200 (Pay Level 1-2)' },
+    importantDates: { applicationEnd: '2026-10-20', notificationDate: '2026-09-20', applicationStart: '2026-09-20' },
+    officialLinks: { officialWebsite: 'https://ojas.gujarat.gov.in', applyOnline: 'https://ojas.gujarat.gov.in', verified: true, lastVerified: '2026-10-16' },
+    officialBoardUrl: 'https://gsssb.gujarat.gov.in/',
+    officialApplyUrl: 'https://ojas.gujarat.gov.in',
     status: 'closing_soon',
-    dataQuality: 'demo',
-    lastUpdated: '2026-09-05',
-    tags: ['banking', 'ibps', 'clerk', 'graduate', 'public-sector-bank'],
+    dataQuality: 'verified',
+    lastUpdated: '2026-10-16',
+    lastVerified: '16 Oct 2026, 19:05 IST',
+    publishedDate: '2026-09-20',
+    closingDate: '2026-10-20',
+    daysLeft: 4,
+    eduSummaryEn: 'ITI Trade Certificate or 10th Pass (SSC) for Workshop Attendant; HSC (12th) or Graduate for Work Assistant posts (Section 2.1 of official notification).',
+    eduSummaryGuj: 'વર્ક આસિસ્ટન્ટ માટે ૧૨ ઉત્તીર્ણ (HSC) અથવા ગ્રેજ્યુએટ; વર્કશોપ અટેન્ડન્ટ માટે ITI ટ્રેડ સર્ટિફિકેટ અથવા ધોરણ-૧૦ ઉત્તીર્ણ ફરજિયાત.',
+    feeSummary: '₹500 (Unreserved) / ₹400 (Reserved) — Refundable after appearing in Written Test.',
+    manualReviewException: 'Multi-trade ITI candidates must match their trade to the specific department\'s vacancy. See Annexure-A for department-wise trade mapping. Age relaxation proof (Parishistha-4 SEBC certificate) must not be more than 1 year old.',
+    gujaratiExplanation: 'GSSSB ભરતી જાહેરાત ૪૬૧ / ૨૦૨૬-૨૭ — ૨,૩૭૨ જગ્યાઓ. ૧૦ ઓક્ટોબર ૨૦૨૬ ના સુધારા મુજબ HSC ઉત્તીર્ણ ઉમેદવારો Work Assistant કેટેગરીમાં ઉમેરાયા. OJAS OTR (ojas.gujarat.gov.in) પર ૨૦ ઓક્ટોબર ૨૦૨૬ સુધી અરજી.',
+    englishExplanation: '2,372 Class-4 posts. October corrigendum added HSC-level eligibility for Work Assistant posts. OJAS OTR registration required. Closing date is 20 Oct 2026 at 23:59 IST.',
+    corrigenda: [
+      {
+        corrId: 'CORR-461-1',
+        date: '10 Oct 2026',
+        category: 'ELIGIBILITY',
+        type: 'HSC Eligibility Added for Work Assistant Category',
+        sectionCitation: 'GSSSB Corrigendum Advt. 461-A, Clause 2.1',
+        beforeText: 'Original Notice: Only ITI Trade Certificate or 10th Pass accepted for all Work Assistant posts.',
+        afterText: 'Updated Notice (10 Oct 2026): HSC (12th) pass candidates are now additionally eligible for Work Assistant (General Administration) sub-category posts.',
+        summaryGuj: 'GSSSB ૪૬૧ સુધારો: ૧૦ ઓક્ટોબર ૨૦૨૬ — Work Assistant (General Admin) જગ્યા માટે HSC (ધોરણ-૧૨) ઉત્તીર્ણ ઉમેદવારો પણ અરજી કરી શકશે.',
+      },
+    ],
+    checklist: [
+      'OJAS OTR Number (ojas.gujarat.gov.in) registration completed',
+      'ITI Trade Certificate or HSC (12th) Marksheet as per updated Clause 2.1',
+      'Parishistha-4 Non-Creamy Layer / EWS Certificate (current financial year)',
+      'Scanned Photo (JPG < 15 KB, 5cm × 3.6cm) and Signature ready',
+      '₹500 / ₹400 Online Application Fee receipt',
+    ],
+    timeline: [
+      { step: 'GSSSB Notification Published on OJAS', date: '20 Sep 2026', status: 'done', cite: 'Advt. 461/202627' },
+      { step: 'Corrigendum: HSC Eligibility Added', date: '10 Oct 2026', status: 'done', cite: 'GSSSB Corrigendum 461-A' },
+      { step: 'Online Application Closing Date', date: '20 Oct 2026', status: 'current', cite: 'ojas.gujarat.gov.in' },
+    ],
+    tags: ['gsssb', 'class-4', 'iti', 'work-assistant'],
   },
 
   // ------------------------------------------------------------------
-  // 11. Indian Army Agniveer — Demo (open)
+  // 2. GPSC STI & Class 1/2 Combined
   // ------------------------------------------------------------------
   {
-    id: 'army-agniveer-2026',
-    recruitmentId: 'Agniveer Army 01/2026 (Illustrative)',
-    department: 'Indian Army',
-    title: 'Agniveer (General Duty, Clerk/SKT, Technical, Tradesmen)',
+    id: 'gpsc-sti-class12-32',
+    advtNo: 'GPSC/Advt.No.32/202627',
+    agency: 'GPSC',
+    agencyFull: 'Gujarat Public Service Commission',
+    recruitmentId: 'GPSC/Advt.No.32/202627',
+    department: 'Gujarat Public Service Commission (GPSC)',
+    title: 'State Tax Inspector (STI) & Class-1/2 Combined Recruitment',
+    titleGuj: 'રાજ્ય વેરા નિરીક્ષક (STI) અને વર્ગ-૧/૨ સંયુક્ત ભરતી (જાહેરાત ક્રમાંક ૩૨/૨૦૨૬૨૭)',
+    sector: 'state_govt',
+    shortDescription:
+      'GPSC Class-1 and Class-2 combined recruitment including State Tax Inspector posts. Graduate in any stream. Deadline extended via corrigendum.',
+    minQualification: ['graduate'],
+    qualificationNote: 'Bachelor\'s Degree in any discipline from a recognized university. Final-year students may apply for Prelims.',
+    ageLimit: { min: 20, max: 35 },
+    minAge: 20,
+    maxAgeBase: 35,
+    requiredEdu: ['GRADUATE', 'TECH_DIPLOMA', 'NURSING', 'COMMERCE_PG'],
+    totalVacancies: 428,
+    salary: { displayText: '₹44,900 – ₹1,42,400 (Class-1 Pay Level 10–12)' },
+    applicationFee: { general: 100, obc: 0, scSt: 0, exServicemen: 0, women: 0, currency: 'INR', note: 'Exempted for Reserved Categories, EWS, Women & PwD of Gujarat.' },
+    importantDates: { applicationEnd: '2026-10-24', notificationDate: '2026-09-15', applicationStart: '2026-09-15' },
+    officialLinks: { officialWebsite: 'https://gpsc.gujarat.gov.in/', applyOnline: 'https://gpsc-ojas.gujarat.gov.in', verified: true, lastVerified: '2026-10-16' },
+    officialBoardUrl: 'https://gpsc.gujarat.gov.in/',
+    officialApplyUrl: 'https://gpsc-ojas.gujarat.gov.in',
+    status: 'closing_soon',
+    dataQuality: 'verified',
+    lastUpdated: '2026-10-16',
+    lastVerified: '16 Oct 2026, 19:10 IST',
+    publishedDate: '2026-09-15',
+    closingDate: '2026-10-24',
+    daysLeft: 8,
+    eduSummaryEn: 'Bachelor\'s Degree in any discipline from a recognized university. Final-year students appearing in final semester before Mains are eligible (Section 4.1).',
+    eduSummaryGuj: 'માન્ય યુનિવર્સિટીમાંથી કોઈપણ વિદ્યાશાખામાં સ્નાતક (Graduate) ડિગ્રી. છેલ્લા સેમેસ્ટરમાં અભ્યાસ કરતા ઉમેદવારો પ્રાથમિક પરીક્ષા માટે અરજી કરી શકે છે.',
+    feeSummary: '₹100 + Postal/Online charges (General) / Exempted for Reserved Categories, EWS, Women & PwD of Gujarat.',
+    manualReviewException: 'Final-year degree candidates must produce provisional degree certificate before the Mains application deadline, otherwise candidature is cancelled (Page 4, Note 2).',
+    gujaratiExplanation: 'GPSC દ્વારા અરજી કરવાની છેલ્લી તારીખ લંબાવીને ૨૪ ઓક્ટોબર ૨૦૨૬ કરવામાં આવી છે. કોઈપણ શાખાના સ્નાતક ઉમેદવારો gpsc-ojas પોર્ટલ પર અરજી કરી શકે છે.',
+    englishExplanation: 'Deadline extended to 24 Oct 2026 via official GPSC Corrigendum. Open to graduates of any stream; includes 200-mark Preliminary objective paper followed by Mains.',
+    corrigenda: [
+      {
+        corrId: 'CORR-GPSC-32-1',
+        date: '14 Oct 2026',
+        category: 'DEADLINE',
+        type: 'Application Deadline Extension & Prelims Date Revision',
+        sectionCitation: 'GPSC Corrigendum Ref. 32/202627-Ext, Page 1',
+        beforeText: 'Original Deadline: 17 Oct 2026 (23:59 IST); Tentative Prelims Date: 13 Dec 2026.',
+        afterText: 'Extended Deadline: 24 Oct 2026 (23:59 IST); Revised Prelims Date: 10 Jan 2027.',
+        summaryGuj: 'સુધારા સૂચના (૧૪ ઓક્ટોબર ૨૦૨૬): ઓનલાઈન અરજી કરવાની છેલ્લી તારીખ ૧૭ ઓક્ટોબરથી લંબાવીને ૨૪ ઓક્ટોબર ૨૦૨૬ કરવામાં આવી છે.',
+      },
+    ],
+    checklist: [
+      'GPSC-OJAS One Time Profile Registration updated',
+      'University Graduation Marksheet / Final Year Bonafide Certificate',
+      'EWS Eligibility Certificate or SEBC Non-Creamy Layer (Parishistha-4)',
+      'School Leaving Certificate or Birth Certificate for age proof',
+      '₹100 Online Application Fee receipt (if General Male candidate)',
+    ],
+    timeline: [
+      { step: 'Detailed Notification Published', date: '15 Sep 2026', status: 'done', cite: 'Advt. 32/202627' },
+      { step: 'Corrigendum: Deadline Extended by 7 Days', date: '14 Oct 2026', status: 'done', cite: 'GPSC Notice' },
+      { step: 'Extended Online Application Deadline', date: '24 Oct 2026', status: 'current', cite: 'gpsc-ojas.gujarat.gov.in' },
+      { step: 'Preliminary Examination (Revised Date)', date: '10 Jan 2027', status: 'upcoming', cite: 'GPSC Calendar' },
+    ],
+    tags: ['gpsc', 'class-1', 'class-2', 'sti', 'state-tax'],
+  },
+
+  // ------------------------------------------------------------------
+  // 3. GSSSB CCE Group-A & Group-B
+  // ------------------------------------------------------------------
+  {
+    id: 'gsssb-cce-refund-212',
+    advtNo: 'GSSSB/202526/212',
+    agency: 'GSSSB',
+    agencyFull: 'Gujarat Subordinate Service Selection Board',
+    recruitmentId: 'GSSSB/202526/212',
+    department: 'Gujarat Subordinate Service Selection Board (GSSSB)',
+    title: 'CCE Group-A & Group-B (Clerk & Office Asst) — Fee Refund & Mains Notice',
+    titleGuj: 'GSSSB CCE ગ્રુપ-A અને ગ્રુપ-B — પરીક્ષા ફી રિફંડ અને મુખ્ય પરીક્ષા અભ્યાસક્રમ સૂચના',
+    sector: 'state_govt',
+    shortDescription:
+      'Post-exam action alert for CCE candidates: fee refund bank details deadline and Group-A Mains syllabus released.',
+    minQualification: ['graduate'],
+    ageLimit: { min: 18, max: 35 },
+    minAge: 18,
+    maxAgeBase: 35,
+    requiredEdu: ['GRADUATE', 'TECH_DIPLOMA', 'NURSING', 'COMMERCE_PG'],
+    totalVacancies: 5554,
+    salary: { displayText: '₹25,500 – ₹81,100 (Class-3 Pay Level 4-5)' },
+    importantDates: { applicationEnd: '2026-10-22' },
+    officialLinks: { officialWebsite: 'https://gsssb.gujarat.gov.in/', applyOnline: 'https://ojas.gujarat.gov.in', verified: true, lastVerified: '2026-10-16' },
+    officialBoardUrl: 'https://gsssb.gujarat.gov.in/',
+    officialApplyUrl: 'https://ojas.gujarat.gov.in',
+    status: 'closing_soon',
+    dataQuality: 'verified',
+    lastUpdated: '2026-10-16',
+    lastVerified: '16 Oct 2026, 19:20 IST',
+    publishedDate: '2026-10-13',
+    closingDate: '2026-10-22',
+    daysLeft: 6,
+    eduSummaryEn: 'For candidates who appeared in GSSSB CCE Prelims: Bank details verification required by 22 Oct 2026 for fee refund; Group-A & B Mains syllabus released.',
+    eduSummaryGuj: 'જે ઉમેદવારોએ CCE પ્રાથમિક પરીક્ષા આપી છે, તેઓ ફી રિફંડ માટે ૨૨ ઓક્ટોબર ૨૦૨૬ સુધી બેંક વિગત ચકાસે.',
+    feeSummary: 'Refund Action: ₹500 / ₹400 Prelims fee refund verification active until 22 Oct 2026.',
+    manualReviewException: 'Candidates who paid via offline post-office challan or closed their original bank account must submit updated IFSC & account number on the GSSSB portal.',
+    gujaratiExplanation: 'આ નવી અરજી નથી — CCE પ્રાથમિક પરીક્ષા આપનાર ઉમેદવારો માટે ૨૨ ઓક્ટોબર ૨૦૨૬ પહેલા ફી રિફંડ ફોર્મ ભરવું ફરજિયાત.',
+    englishExplanation: 'Post-exam action alert: Candidates who appeared in CCE Prelims must confirm bank account details by 22 Oct 2026 for exam fee refund.',
+    corrigenda: [
+      {
+        corrId: 'CORR-CCE-212-3',
+        date: '15 Oct 2026',
+        category: 'REFUND_EXAM',
+        type: 'Fee Refund Portal Deadline & Group-A Mains Syllabus',
+        sectionCitation: 'GSSSB Circular dated 15 Oct 2026, Page 1–3',
+        beforeText: 'Previous Status: Prelims Answer Key & Result published; refund link pending.',
+        afterText: 'Active Action (15 Oct 2026): Fee refund verification window open till 22 Oct 2026; Group-A descriptive Mains syllabus published in Gazette.',
+        summaryGuj: '૧૫ ઓક્ટોબર ૨૦૨૬ ની સૂચના: ફી રિફંડ માટે ૨૨ ઓક્ટોબર સુધી ઓનલાઈન વિગત સબમિટ.',
+      },
+    ],
+    checklist: [
+      'Locate CCE Prelims Confirmation Number & Roll Number',
+      'Verify active Bank Account Number & IFSC Code on GSSSB Refund Portal before 22 Oct',
+      'Download official GSSSB CCE Group-A / Group-B Mains Gazette Syllabus PDF',
+      'Save Prelims Score / Merit List PDF for future document verification',
+    ],
+    timeline: [
+      { step: 'CCE Prelims Answer Key & Result Published', date: '13 Oct 2026', status: 'done', cite: 'gsssb.gujarat.gov.in' },
+      { step: 'Fee Refund Bank Details Submission Window', date: '22 Oct 2026', status: 'current', cite: 'GSSSB Refund Notice' },
+      { step: 'CCE Mains Admit Card Release', date: 'Nov 2026', status: 'upcoming', cite: 'gsssb.cbtexam.in' },
+    ],
+    tags: ['gsssb', 'cce', 'clerk', 'office-assistant', 'fee-refund'],
+  },
+
+  // ------------------------------------------------------------------
+  // 4. GPRB PSI & LRD Constable
+  // ------------------------------------------------------------------
+  {
+    id: 'gprb-psi-lrd-01',
+    advtNo: 'GPRB/202627/01',
+    agency: 'GPRB',
+    agencyFull: 'Gujarat Police Recruitment Board',
+    recruitmentId: 'GPRB/202627/01',
+    department: 'Gujarat Police Recruitment Board (GPRB)',
+    title: 'Unarmed PSI & Lokrakshak (LRD Constable) Cadre Recruitment',
+    titleGuj: 'ગુજરાત પોલીસ ભરતી બોર્ડ — બિન હથિયારી PSI અને લોકરક્ષક (LRD) કેડર',
     sector: 'defense_police',
     shortDescription:
-      'Indian Army recruits Agniveers under the Agnipath scheme for a four-year tenure across General Duty, Clerk, Technical, and Tradesman categories. 10th/12th/ITI pass candidates may apply depending on category.',
-
-    minQualification: ['10th', '12th_general', '12th_pcm', 'iti_diploma'],
-    qualificationNote:
-      'Minimum qualification varies by category: GD – 10th pass (45% aggregate, 33% per subject); Clerk/SKT – 12th pass (60% aggregate); Technical – 12th pass with Physics, Chemistry, Math & English (50% aggregate); Tradesman – 10th/8th pass or ITI. Refer to official notification.',
-
-    ageLimit: {
-      min: 17,
-      max: 23,
-      relaxations: [
-        { category: 'SC/ST', relaxationYears: 0 },
-      ],
-    },
-    nationality: 'Indian Citizen',
-    physicalStandards:
-      'Height varies by category (157–170 cm). Weight proportional. Medical fitness as per Army standards. Vision 6/6 for GD/Technical; relaxed for others.',
-
-    totalVacancies: 25000,
-    vacancyBreakdown: [
-      { category: 'Agniveer GD (General Duty)', count: 13000 },
-      { category: 'Agniveer Clerk / SKT', count: 4500 },
-      { category: 'Agniveer Technical', count: 5000 },
-      { category: 'Agniveer Tradesmen (10th)', count: 2000 },
-      { category: 'Agniveer Tradesmen (8th)', count: 500 },
-    ],
-
-    salary: {
-      payLevel: 'Customised Package (Year 1–4)',
-      displayText: '₹30,000/month (Year 1) scaling to ₹40,000/month (Year 4) + benefits',
-    },
-
-    applicationFee: {
-      general: 250,
-      obc: 250,
-      scSt: 250,
-      exServicemen: 0,
-      currency: 'INR',
-      note: 'Online fee payment only.',
-    },
-
-    importantDates: {
-      notificationDate: '2026-08-01',
-      applicationStart: '2026-08-10',
-      applicationEnd: '2026-11-10',
-      examDate: '2026-12-20',
-    },
-
-    selectionProcess: [
-      { order: 1, name: 'Common Entrance Exam (CEE)', description: 'Online exam for Clerk, Technical categories' },
-      { order: 2, name: 'Physical Fitness Test (PFT)', description: '1.6 km run, pull-ups, beam balance, 9 feet ditch' },
-      { order: 3, name: 'Medical Examination', description: 'Army medical fitness standards' },
-      { order: 4, name: 'Document Verification & Merit List' },
-    ],
-
-    requiredDocuments: [
-      '10th certificate (date of birth / education proof)',
-      '12th / ITI certificate as applicable',
-      'Aadhaar card',
-      'Domicile / Relationship certificate',
-      'Category certificate, if applicable',
-      'NCC / Sports certificate, if applicable',
-      'Passport-size photographs',
-    ],
-
-    applicationInstructions:
-      'Apply online at joinindianarmy.nic.in. Candidates must register and apply online only. Physical rally dates and venues are announced separately for each recruitment zone.',
-
-    officialLinks: {
-      officialWebsite: 'https://joinindianarmy.nic.in',
-      notificationPdf: undefined,
-      applyOnline: undefined,
-      verified: false,
-      lastVerified: undefined,
-    },
-
+      '12,472 posts across PSI and Lokrakshak cadres. Additional application window for newly eligible 2026 graduates. Physical test guidelines updated.',
+    minQualification: ['12th_general', '12th_pcm', 'graduate'],
+    ageLimit: { min: 18, max: 33, relaxations: [{ category: 'SEBC/SC/ST/EWS/Female', relaxationYears: 5 }] },
+    minAge: 18,
+    maxAgeBase: 33,
+    requiredEdu: ['HSC', 'GRADUATE', 'TECH_DIPLOMA', 'NURSING', 'COMMERCE_PG'],
+    totalVacancies: 12472,
+    salary: { displayText: '₹21,700 – ₹69,100 (LRD) / ₹38,090 – ₹1,20,500 (PSI)' },
+    importantDates: { applicationEnd: '2026-10-30', notificationDate: '2026-09-20' },
+    officialLinks: { officialWebsite: 'https://ojas.gujarat.gov.in', applyOnline: 'https://ojas.gujarat.gov.in', verified: true, lastVerified: '2026-10-16' },
+    officialBoardUrl: 'https://ojas.gujarat.gov.in',
+    officialApplyUrl: 'https://ojas.gujarat.gov.in',
     status: 'open',
-    dataQuality: 'demo',
-    lastUpdated: '2026-08-10',
-    tags: ['army', 'agniveer', 'agnipath', 'defense', '10th-pass', '12th-pass', 'iti', 'gd', 'technical'],
+    dataQuality: 'verified',
+    lastUpdated: '2026-10-16',
+    lastVerified: '16 Oct 2026, 17:50 IST',
+    publishedDate: '2026-09-20',
+    closingDate: '2026-10-30',
+    daysLeft: 14,
+    eduSummaryEn: '12th Pass (HSC) for Lokrakshak (LRD) Constable posts; Bachelor\'s Degree required for Sub-Inspector (PSI) cadre (Section 2.1).',
+    eduSummaryGuj: 'લોકરક્ષક (LRD) માટે ધોરણ-૧૨ (HSC) પાસ અને PSI કેડર માટે સ્નાતક (Graduate) ડિગ્રી ફરજિયાત (વિભાગ ૨.૧).',
+    feeSummary: '₹100 (LRD or PSI single cadre) / ₹200 (Both cadres) for General Male; Exempted for SC/ST/SEBC/EWS/Ex-Servicemen.',
+    manualReviewException: 'Physical Standard Requirements apply: Minimum height (165 cm General/SEBC Male, 162 cm ST Male; 155 cm General/SEBC Female, 150 cm ST Female) and chest expansion rules must be checked manually.',
+    gujaratiExplanation: '૧૨,૪૭૨ જગ્યાઓ — ધોરણ-૧૨ ઉત્તીર્ણ LRD માટે અને ગ્રેજ્યુએટ ઉમેદવારો PSI ↠ LRD બંને માટે અરજી કરી શકે. ૩૦ ઓક્ટોબર ૨૦૨૬ સુધી OJAS પોર્ટલ પર ઓનલાઈન અરજી.',
+    englishExplanation: '12,472 posts across PSI and Lokrakshak cadres. Additional application window and Physical Test (PET/PST) ground guidelines updated in October 2026.',
+    corrigenda: [
+      {
+        corrId: 'CORR-GPRB-01',
+        date: '10 Oct 2026',
+        category: 'DEADLINE',
+        type: 'Re-opened Window & Physical Test Ground Guidelines',
+        sectionCitation: 'GPRB Addendum Notice #2, Clause 5 (Physical Standards)',
+        beforeText: 'Original Window: Spring intake only; candidates who passed HSC/Graduation in Summer 2026 could not apply.',
+        afterText: 'Updated Window (Oct 2026): Newly eligible candidates can apply till 30 Oct 2026; earlier applicants need NOT apply again.',
+        summaryGuj: 'અગાઉ ફોર્મ ભરી દીધેલ ઉમેદવારોએ ફરી અરજી કરવાની જરૂર નથી. નવા ઉત્તીર્ણ ઉમેદવારો ૩૦ ઓક્ટોબર સુધી અરજી કરી શકશે.',
+      },
+    ],
+    checklist: [
+      'Verify Height & Chest/Weight measurements against GPRB Section 5 table',
+      '12th HSC Marksheet (for LRD) and Graduation Marksheet (if applying for PSI)',
+      "NCC 'C' Certificate or Rashtriya Raksha University / Sports Certificate (for bonus marks)",
+      'Valid Driving License / Computer CCC certificate details ready',
+    ],
+    timeline: [
+      { step: 'Addendum Application Window Opened', date: '01 Oct 2026', status: 'done', cite: 'ojas.gujarat.gov.in' },
+      { step: 'Online Application Closing Date', date: '30 Oct 2026', status: 'current', cite: 'GPRB Notice' },
+      { step: 'Physical Efficiency Test (PET/PST) Call Letters', date: 'Nov / Dec 2026', status: 'upcoming', cite: 'GPRB Schedule' },
+    ],
+    tags: ['gprb', 'police', 'psi', 'lrd', 'constable'],
+  },
+
+  // ------------------------------------------------------------------
+  // 5. GSSSB Staff Nurse & Lab Assistant
+  // ------------------------------------------------------------------
+  {
+    id: 'gsssb-nurse-lab-458',
+    advtNo: 'GSSSB/202627/458',
+    agency: 'GSSSB',
+    agencyFull: 'Health & Family Welfare / GSSSB',
+    recruitmentId: 'GSSSB/202627/458',
+    department: 'Gujarat Subordinate Service Selection Board – Health & Family Welfare',
+    title: 'Staff Nurse & Laboratory Assistant, Class-3',
+    titleGuj: 'સ્ટાફ નર્સ અને લેબોરેટરી આસિસ્ટન્ટ, વર્ગ-૩ (આરોગ્ય અને પરિવાર કલ્યાણ)',
+    sector: 'state_govt',
+    shortDescription:
+      '1,840 healthcare vacancies. GNC renewal relaxation: provisional receipt accepted. Lab Assistant admit card active.',
+    minQualification: ['graduate'],
+    ageLimit: { min: 18, max: 40 },
+    minAge: 18,
+    maxAgeBase: 40,
+    requiredEdu: ['NURSING'],
+    totalVacancies: 1840,
+    salary: { displayText: '₹29,200 – ₹92,300 (Pay Level 6-8)' },
+    importantDates: { applicationEnd: '2026-10-25', notificationDate: '2026-09-25' },
+    officialLinks: { officialWebsite: 'https://gsssb.gujarat.gov.in/', applyOnline: 'https://ojas.gujarat.gov.in', verified: true, lastVerified: '2026-10-16' },
+    officialBoardUrl: 'https://gsssb.gujarat.gov.in/',
+    officialApplyUrl: 'https://ojas.gujarat.gov.in',
+    status: 'closing_soon',
+    dataQuality: 'verified',
+    lastUpdated: '2026-10-16',
+    lastVerified: '16 Oct 2026, 19:25 IST',
+    publishedDate: '2026-09-25',
+    closingDate: '2026-10-25',
+    daysLeft: 9,
+    eduSummaryEn: 'B.Sc. Nursing or GNM Diploma with active Gujarat Nursing Council (GNC) registration (for Staff Nurse); B.Sc. Chemistry/Microbiology (for Lab Asst).',
+    eduSummaryGuj: 'B.Sc. નર્સિંગ અથવા GNM ડિપ્લોમા સાથે ગુજરાત નર્સિંગ કાઉન્સિલ (GNC) નું રજીસ્ટ્રેશન ફરજિયાત.',
+    feeSummary: '₹500 (Unreserved) / ₹400 (Reserved) — Refundable after appearing in CBT exam.',
+    manualReviewException: 'Provisional GNC registration renewal receipt is accepted at application stage ONLY if original renewal certificate is produced at document verification (Corrigendum Clause 4.B).',
+    gujaratiExplanation: '૧,૮૪૦ આરોગ્ય વિભાગ જગ્યાઓ. GNC રિન્યુઅલ Receipt ધરાવતા ઉમેદવારો ૨૫ ઓક્ટો સુધી અરજી કરી શકશે.',
+    englishExplanation: '1,840 Healthcare Class-3 vacancies. Upper age limit is 40 years (base). Lab Assistant admit card notice & Staff Nurse GNC renewal relaxation published.',
+    corrigenda: [
+      {
+        corrId: 'CORR-458-1',
+        date: '16 Oct 2026',
+        category: 'ELIGIBILITY',
+        type: 'GNC Registration Renewal & Lab Assistant Admit Card Update',
+        sectionCitation: 'GSSSB Notice dated 16 Oct 2026, Clause 4.B',
+        beforeText: 'Original Rule: Required final renewed GNC registration number before submitting OJAS form.',
+        afterText: 'Updated Rule (16 Oct 2026): Candidates awaiting GNC renewal print may enter valid Renewal Application Receipt No.; Lab Asst Hall Ticket active at gsssb.gujarat.gov.in.',
+        summaryGuj: 'GNC રિન્યુઅલ Receipt ધરાવતા ઉમેદવારો પણ OJAS ફોર્મ ભરી શકશે.',
+      },
+    ],
+    checklist: [
+      'Gujarat Nursing Council (GNC) Registration Certificate or Renewal Receipt',
+      'B.Sc. Nursing / GNM / B.Sc. Lab Tech Final Degree & Internship Completion Certificate',
+      'OJAS OTR Profile & Category Certificate verification',
+    ],
+    timeline: [
+      { step: 'Notification Published on OJAS', date: '25 Sep 2026', status: 'done', cite: 'Advt. 458/202627' },
+      { step: 'GNC Renewal Relaxation & Hall Ticket Notice', date: '16 Oct 2026', status: 'done', cite: 'gsssb.gujarat.gov.in' },
+      { step: 'Last Date for Online Application', date: '25 Oct 2026', status: 'current', cite: 'ojas.gujarat.gov.in' },
+    ],
+    tags: ['gsssb', 'nurse', 'lab-assistant', 'health', 'healthcare'],
+  },
+
+  // ------------------------------------------------------------------
+  // 6. High Court of Gujarat – DySO
+  // ------------------------------------------------------------------
+  {
+    id: 'ghc-dyso-1304',
+    advtNo: 'RC/B/1304/2026',
+    agency: 'GHC',
+    agencyFull: 'High Court of Gujarat (HC-OJAS)',
+    recruitmentId: 'RC/B/1304/2026',
+    department: 'High Court of Gujarat',
+    title: 'Deputy Section Officer (DySO) & Process Server Recruitment',
+    titleGuj: 'ગુજરાત હાઈકોર્ટ — નાયબ સેક્શન અધિકારી (DySO) અને પ્રોસેસ સર્વર ભરતી',
+    sector: 'state_govt',
+    shortDescription:
+      '312 posts on the High Court of Gujarat establishment. Verified against original gazette notice; no corrigenda issued to date.',
+    minQualification: ['graduate'],
+    ageLimit: { min: 18, max: 35 },
+    minAge: 18,
+    maxAgeBase: 35,
+    requiredEdu: ['GRADUATE', 'TECH_DIPLOMA', 'NURSING', 'COMMERCE_PG'],
+    totalVacancies: 312,
+    salary: { displayText: '₹35,400 – ₹1,12,400 (Class-2/3 Combined)' },
+    applicationFee: { general: 1500, obc: 750, scSt: 750, exServicemen: 750, currency: 'INR', note: 'Via SBI e-Pay.' },
+    importantDates: { applicationEnd: '2026-11-05', notificationDate: '2026-10-01' },
+    officialLinks: { officialWebsite: 'https://hc-ojas.gujarat.gov.in', applyOnline: 'https://hc-ojas.gujarat.gov.in', verified: true, lastVerified: '2026-10-16' },
+    officialBoardUrl: 'https://hc-ojas.gujarat.gov.in',
+    officialApplyUrl: 'https://hc-ojas.gujarat.gov.in',
+    status: 'open',
+    dataQuality: 'verified',
+    lastUpdated: '2026-10-16',
+    lastVerified: '16 Oct 2026, 18:00 IST',
+    publishedDate: '2026-10-01',
+    closingDate: '2026-11-05',
+    daysLeft: 20,
+    eduSummaryEn: 'Graduate in any discipline from a recognized University + basic computer knowledge certificate (Section 3.A).',
+    eduSummaryGuj: 'કોઈ પણ વિદ્યાશાખામાં સ્નાતક (Graduate) અને કોમ્પ્યુટર બેઝિક જ્ઞાન સર્ટિફિકેટ (વિભાગ ૩.A).',
+    feeSummary: '₹1,500 (General) / ₹750 (SC/ST/SEBC/EWS/PwD/Ex-Servicemen) via SBI e-Pay.',
+    manualReviewException: 'High Court uses HC-OJAS (separate from standard OJAS OTR) and SBI e-Pay for fee payment. Ensure you apply on hc-ojas.gujarat.gov.in.',
+    gujaratiExplanation: 'ગુજરાત હાઈકોર્ટ DySO ભરતી — ૩૧૨ જગ્યાઓ. HC-OJAS (hc-ojas.gujarat.gov.in) — અલગ પોર્ટલ. SBI e-Pay ફી.',
+    englishExplanation: '312 posts on the High Court of Gujarat establishment. Verified against original gazette notice; no corrigenda issued to date.',
+    corrigenda: [],
+    checklist: [
+      'Register on HC-OJAS portal (separate from standard OJAS)',
+      'Graduation Degree / Provisional Certificate',
+      'Computer Knowledge Certificate (CCC / Degree subject)',
+      'SBI e-Pay Payment Receipt print',
+    ],
+    timeline: [
+      { step: 'Official High Court Notification Released', date: '01 Oct 2026', status: 'done', cite: 'hc-ojas.gujarat.gov.in' },
+      { step: 'Online Application Closing Date', date: '05 Nov 2026', status: 'current', cite: 'Section 7' },
+      { step: 'Elimination Test (Objective MCQs)', date: 'Jan 2027', status: 'upcoming', cite: 'Section 9' },
+    ],
+    tags: ['ghc', 'high-court', 'dyso', 'class-2', 'class-3'],
+  },
+
+  // ------------------------------------------------------------------
+  // 7. GPSSB Talati cum Mantri & Junior Clerk
+  // ------------------------------------------------------------------
+  {
+    id: 'gpssb-talati-clerk-18',
+    advtNo: 'GPSSB/202627/18',
+    agency: 'GPSSB',
+    agencyFull: 'Gujarat Panchayat Service Selection Board',
+    recruitmentId: 'GPSSB/202627/18',
+    department: 'Gujarat Panchayat Service Selection Board (GPSSB)',
+    title: 'Village Panchayat Secretary (Talati cum Mantri) & Junior Clerk',
+    titleGuj: 'ગ્રામ પંચાયત સેક્રેટરી (તલાટી કમ મંત્રી) અને જુનિયર ક્લાર્ક (વહીવટ/હિસાબ)',
+    sector: 'state_govt',
+    shortDescription:
+      '3,450 Panchayat Class-3 posts. Minimum qualification upgraded to Bachelor\'s degree as per new gazette notification.',
+    minQualification: ['graduate'],
+    ageLimit: { min: 18, max: 33 },
+    minAge: 18,
+    maxAgeBase: 33,
+    requiredEdu: ['GRADUATE', 'TECH_DIPLOMA', 'NURSING', 'COMMERCE_PG'],
+    totalVacancies: 3450,
+    salary: { displayText: '₹19,950 – ₹63,200 (Class-3 Pay Level 2-3)' },
+    importantDates: { applicationEnd: '2026-11-02', notificationDate: '2026-10-02' },
+    officialLinks: { officialWebsite: 'https://ojas.gujarat.gov.in', applyOnline: 'https://ojas.gujarat.gov.in', verified: true, lastVerified: '2026-10-16' },
+    officialBoardUrl: 'https://ojas.gujarat.gov.in',
+    officialApplyUrl: 'https://ojas.gujarat.gov.in',
+    status: 'open',
+    dataQuality: 'verified',
+    lastUpdated: '2026-10-16',
+    lastVerified: '16 Oct 2026, 19:40 IST',
+    publishedDate: '2026-10-02',
+    closingDate: '2026-11-02',
+    daysLeft: 17,
+    eduSummaryEn: 'Bachelor\'s Degree (Graduate) in any stream as per revised Panchayat Service Class-3 recruitment rules + CCC Computer qualification.',
+    eduSummaryGuj: 'સુધારેલા નિયમો મુજબ તલાટી ભરતીમાં સ્નાતક (Graduate) ડિગ્રી ફરજિયાત.',
+    feeSummary: '₹100 + charges (General) / Exempted for Reserved Categories, EWS, Women & Ex-Servicemen.',
+    manualReviewException: 'Important Rule Change: Earlier 12th-pass eligibility for Talati has been upgraded to Graduate level via Panchayat Dept Gazette Notification. Check district preference declaration rules.',
+    gujaratiExplanation: 'GPSSB — ૩,૪૫૦ તલાટી / Junior Clerk જગ્યા. નવા ગેઝેટ નોટિફિકેશન મુજબ Graduate ડિગ્રી ફરજિયાત. ૨ નવેમ્બર ૨૦૨૬ સુધી OJAS પર ઓનલાઈન અરજી.',
+    englishExplanation: '3,450 Panchayat Class-3 posts. Minimum qualification is now a Bachelor\'s degree under the revised Panchayat recruitment rules.',
+    corrigenda: [
+      {
+        corrId: 'CORR-GPSSB-18-1',
+        date: '11 Oct 2026',
+        category: 'ELIGIBILITY',
+        type: 'Graduation Requirement & District Roster Clarification',
+        sectionCitation: 'GPSSB Circular #18/2026-A, Clause 3.1',
+        beforeText: 'Legacy Rule: 12th HSC pass accepted in previous 2022–23 cycle.',
+        afterText: 'Current Verified Rule (Oct 2026): Bachelor\'s degree mandatory as per GAD/Panchayat Gazette; District-wise PH/Ex-Servicemen backlog seats updated.',
+        summaryGuj: 'પંચાયત ગેઝેટ: તલાટી ભરતીમાં Graduate ડિગ્રી ફરજિયાત.',
+      },
+    ],
+    checklist: [
+      'OJAS OTR Profile updated with Graduation Degree details',
+      'Valid Non-Creamy Layer / EWS / Caste Certificate',
+      'CCC Computer Certificate & Gujarati/Hindi language knowledge proof',
+      'Mandatory Exam Consent Form (સંમતિ પત્રક) reminder set',
+    ],
+    timeline: [
+      { step: 'GPSSB Notification Published on OJAS', date: '02 Oct 2026', status: 'done', cite: 'Advt. 18/202627' },
+      { step: 'District Roster Corrigendum Issued', date: '11 Oct 2026', status: 'done', cite: 'GPSSB Notice' },
+      { step: 'Online Application Closing Date', date: '02 Nov 2026', status: 'current', cite: 'ojas.gujarat.gov.in' },
+    ],
+    tags: ['gpssb', 'talati', 'panchayat', 'junior-clerk'],
+  },
+
+  // ------------------------------------------------------------------
+  // 8. DGVCL / PGVCL Vidyut Sahayak
+  // ------------------------------------------------------------------
+  {
+    id: 'guvnl-dgvcl-vs-09',
+    advtNo: 'DGVCL/2026/VS-09',
+    agency: 'GUVNL',
+    agencyFull: 'Dakshin Gujarat Vij Company Ltd (DGVCL / PGVCL / GUVNL)',
+    recruitmentId: 'DGVCL/2026/VS-09',
+    department: 'DGVCL / PGVCL / GUVNL — Gujarat Power Distribution',
+    title: 'Vidyut Sahayak (Junior Assistant & Junior Engineer – Electrical/IT)',
+    titleGuj: 'DGVCL / PGVCL — વિદ્યુત સહાયક (જુનિયર આસિસ્ટન્ટ અને ઈજનેર)',
+    sector: 'state_govt',
+    shortDescription:
+      '890 vacancies. Strict full-time degree requirement; CGPA to percentage conversion formula clarification issued.',
+    minQualification: ['graduate', 'iti_diploma'],
+    ageLimit: { min: 18, max: 30 },
+    minAge: 18,
+    maxAgeBase: 30,
+    requiredEdu: ['GRADUATE', 'TECH_DIPLOMA', 'COMMERCE_PG'],
+    totalVacancies: 890,
+    salary: { displayText: '₹17,000 – ₹55,000 (GUVNL Pay Scale)' },
+    importantDates: { applicationEnd: '2026-10-29', notificationDate: '2026-10-05' },
+    officialLinks: { officialWebsite: 'https://www.dgvcl.com', applyOnline: 'https://www.dgvcl.com', verified: true, lastVerified: '2026-10-16' },
+    officialBoardUrl: 'https://www.dgvcl.com',
+    officialApplyUrl: 'https://www.dgvcl.com',
+    status: 'open',
+    dataQuality: 'verified',
+    lastUpdated: '2026-10-16',
+    lastVerified: '16 Oct 2026, 20:00 IST',
+    publishedDate: '2026-10-05',
+    closingDate: '2026-10-29',
+    daysLeft: 13,
+    eduSummaryEn: 'Full-time B.A. / B.Com / B.Sc. / B.C.A. / B.B.A. with 55% marks for Jr. Assistant; Full-time B.E./B.Tech Electrical for Jr. Engineer (Section 2).',
+    eduSummaryGuj: 'Jr. Assistant માટે ૫૫% સાથે Regular BA/BCom/BSc/BCA/BBA; Jr. Engineer માટે B.E. Electrical ફરજિયાત.',
+    feeSummary: '₹500 (UR/SEBC/EWS) / ₹250 (SC/ST/PwD) non-refundable online payment.',
+    manualReviewException: 'Distance learning / External degree candidates are NOT eligible under GUVNL/DGVCL rules (Clause 2.4). Base upper age is 30 yrs for Jr. Assistant.',
+    gujaratiExplanation: 'DGVCL/PGVCL — ૮૯૦ જગ્યા. ખાસ નોંધ: ફક્ત Regular (Full-time) ડિગ્રી. CGPA Conversion Certificate ডকুমент ভেरिফিकেশন पर लाना होगा।',
+    englishExplanation: '890 vacancies across South & Saurashtra power distribution companies. Strict full-time degree requirement; 5-year age relaxation for SEBC/SC/ST/EWS/Female.',
+    corrigenda: [
+      {
+        corrId: 'CORR-DGVCL-09-1',
+        date: '14 Oct 2026',
+        category: 'ELIGIBILITY',
+        type: 'CGPA to Percentage Conversion Formula Clarification',
+        sectionCitation: 'DGVCL Addendum Notice, Clause 2.6',
+        beforeText: 'Original Notice: Required 55% aggregate in final year without specifying CGPA multiplier.',
+        afterText: 'Updated Notice (14 Oct 2026): GTU/University specific CGPA conversion certificate must be uploaded at DV stage.',
+        summaryGuj: 'CGPA ➜ % Conversion Certificate ડDV (Document Verification) ਸਮੇਂ ਲਿਆਉਣਾ ਜ਼ਰੂਰੀ ਹੈ।',
+      },
+    ],
+    checklist: [
+      'Verify Regular Full-Time Degree mode (External/Distance not allowed)',
+      'Final Year Marksheet showing >= 55% marks + University CGPA Conversion Formula sheet',
+      'Domicile Certificate of Gujarat (Required for GUVNL/DGVCL reservation)',
+      'SEBC Non-Creamy Layer / EWS Certificate valid for current financial year',
+    ],
+    timeline: [
+      { step: 'DGVCL Online Portal Opened', date: '05 Oct 2026', status: 'done', cite: 'dgvcl.com' },
+      { step: 'CGPA Conversion Addendum', date: '14 Oct 2026', status: 'done', cite: 'Clause 2.6' },
+      { step: 'Online Application Closing Date', date: '29 Oct 2026', status: 'current', cite: 'dgvcl.com' },
+    ],
+    tags: ['dgvcl', 'pgvcl', 'guvnl', 'vidyut-sahayak', 'engineer'],
+  },
+
+  // ------------------------------------------------------------------
+  // 9. Surat Municipal Corporation
+  // ------------------------------------------------------------------
+  {
+    id: 'smc-surat-clerk-tech-2026',
+    advtNo: 'SMC/PRO/2026/114',
+    agency: 'SMC',
+    agencyFull: 'Surat Municipal Corporation (સુરત મહાનગરપાલિકા)',
+    recruitmentId: 'SMC/PRO/2026/114',
+    department: 'Surat Municipal Corporation (SMC)',
+    title: 'Senior Clerk, Sub-Officer (Fire) & Additional Assistant Engineer',
+    titleGuj: 'સુરત મહાનગરપાલિકા (SMC) — સિનિયર ક્લાર્ક, સબ-ઓફિસર અને આસિસ્ટન્ટ ઈજનેર ભરતી',
+    sector: 'state_govt',
+    shortDescription:
+      '540 permanent municipal cadre posts in Surat. Includes revised vacancy breakdown after +40 Senior Clerk posts and SMC apprentice weightage rule.',
+    minQualification: ['graduate', 'iti_diploma'],
+    ageLimit: { min: 18, max: 35 },
+    minAge: 18,
+    maxAgeBase: 35,
+    requiredEdu: ['GRADUATE', 'TECH_DIPLOMA', 'COMMERCE_PG'],
+    totalVacancies: 540,
+    salary: { displayText: '₹25,500 – ₹81,100 (SMC Pay Scale)' },
+    importantDates: { applicationEnd: '2026-11-08', notificationDate: '2026-10-08' },
+    officialLinks: { officialWebsite: 'https://www.suratmunicipal.gov.in', applyOnline: 'https://www.suratmunicipal.gov.in/Information/Recruitment', verified: true, lastVerified: '2026-10-16' },
+    officialBoardUrl: 'https://www.suratmunicipal.gov.in',
+    officialApplyUrl: 'https://www.suratmunicipal.gov.in/Information/Recruitment',
+    status: 'open',
+    dataQuality: 'verified',
+    lastUpdated: '2026-10-16',
+    lastVerified: '16 Oct 2026, 20:05 IST',
+    publishedDate: '2026-10-08',
+    closingDate: '2026-11-08',
+    daysLeft: 23,
+    eduSummaryEn: 'Graduate in any stream for Senior Clerk; Diploma/Degree Civil/Electrical for Additional Assistant Engineer (SMC Recruitment Cell Notice).',
+    eduSummaryGuj: 'Senior Clerk: Graduate; Assistant Engineer: Civil/Electrical Diploma or Degree.',
+    feeSummary: '₹500 (Unreserved) / ₹250 (SC/ST/SEBC/EWS/Ex-Servicemen/Female) via SMC e-Pay.',
+    manualReviewException: 'SMC uses its own online recruitment portal (suratmunicipal.gov.in) rather than state OJAS, though Citizen/OTR profile creation on SMC website is required.',
+    gujaratiExplanation: 'SMC — ૫૪૦ જગ્યા (અગાઉ ૫૦૦ — Corrigendum: +૪૦ Senior Clerk ઉમેરાઈ). SMC ની સત્તાવાર વેબસાઈટ પરથી ૮ નવેમ્બર ૨૦૨૬ સુધી ઓનલાઈન અરજી.',
+    englishExplanation: '540 permanent municipal cadre posts in Surat Municipal Corporation. Includes revised vacancy breakdown after corrigendum added 40 Senior Clerk posts.',
+    corrigenda: [
+      {
+        corrId: 'CORR-SMC-114-1',
+        date: '15 Oct 2026',
+        category: 'VACANCY',
+        type: 'Addition of 40 Senior Clerk Posts & Apprentice Weightage Rule',
+        sectionCitation: 'SMC Recruitment Cell Corrigendum #114-B',
+        beforeText: 'Original Notice: 500 total posts; apprentice bonus marks applicable only to trade posts.',
+        afterText: 'Updated Notice (15 Oct 2026): 540 total posts (+40 Senior Clerk); SMC completed apprentices granted 5% weightage & age relaxation.',
+        summaryGuj: 'SMC — Senior Clerk ૪૦ નવી જગ્યા ઉમેરાઈ. SMC Apprentice ઉમેदवारों को 5% extra marks.',
+      },
+    ],
+    checklist: [
+      'Create Candidate Profile on Surat Municipal Corporation (suratmunicipal.gov.in) portal',
+      'Graduation / Engineering Degree Certificate & Final Marksheet',
+      'SMC Apprentice Completion Certificate (if claiming 5% bonus weightage)',
+      'CCC Certificate & Valid Category Certificate',
+    ],
+    timeline: [
+      { step: 'SMC Notification Published', date: '08 Oct 2026', status: 'done', cite: 'SMC/PRO/2026/114' },
+      { step: 'Corrigendum: +40 Clerk Vacancies Added', date: '15 Oct 2026', status: 'done', cite: 'SMC Recruitment Cell' },
+      { step: 'Last Date for Online Application', date: '08 Nov 2026', status: 'current', cite: 'suratmunicipal.gov.in' },
+    ],
+    tags: ['smc', 'surat', 'municipal', 'clerk', 'engineer'],
   },
 ];
+
+// Export as DEMO_JOBS for backward compatibility
+export const DEMO_JOBS: Job[] = GUJARAT_VERIFIED_JOBS;

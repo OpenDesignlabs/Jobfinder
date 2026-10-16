@@ -1,0 +1,15 @@
+{
+  "name": "jobdirect-server",
+  "version": "2.0.0",
+  "description": "JobDirect / Jobfinder Gujarat Recruitment Intelligence REST API & Static Server",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.1"
+  }
+}
