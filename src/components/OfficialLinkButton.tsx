@@ -10,6 +10,8 @@
 
 import { ExternalLink, FileText, Globe, AlertCircle } from 'lucide-react';
 import { clsx } from 'clsx';
+import { Capacitor } from '@capacitor/core';
+import { Browser } from '@capacitor/browser';
 
 interface OfficialLinkButtonProps {
   href?: string;
@@ -48,7 +50,7 @@ export function OfficialLinkButton({
     );
   }
 
-  function handleClick(e: React.MouseEvent) {
+  async function handleClick(e: React.MouseEvent) {
     e.stopPropagation();
     // Safety: validate that the URL is a real http/https URL (not javascript: or data:)
     try {
@@ -61,7 +63,16 @@ export function OfficialLinkButton({
       alert('Invalid URL. Please visit the official website directly.');
       return;
     }
-    window.open(href, '_blank', 'noopener,noreferrer');
+
+    try {
+      if (Capacitor.isNativePlatform()) {
+        await Browser.open({ url: href! });
+      } else {
+        window.open(href, '_blank', 'noopener,noreferrer');
+      }
+    } catch {
+      window.open(href, '_blank', 'noopener,noreferrer');
+    }
   }
 
   return (

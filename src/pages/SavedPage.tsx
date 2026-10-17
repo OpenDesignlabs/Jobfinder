@@ -1,17 +1,46 @@
 // ============================================================
-// Saved Applications & Document Vault Page
-// Personal application pipeline + OJAS document readiness vault
+// Saved Applications & Document Vault Page (v3 — Full Spec §10)
+// Full application state machine: interested → preparing → ready_to_apply
+//   → applied_by_user → admit_card_available → examination_completed
+//   → result_available (+ terminal: not_interested, withdrawn, cancelled)
+// Checklist items with item types: required_by_notice, conditional_requirement,
+//   recommended_preparation, user_added.
 // ============================================================
 import { useState } from 'react';
-import { Bookmark, CheckCircle2, Circle, ChevronDown, ExternalLink, Printer, Shield } from 'lucide-react';
-import { useSavedJobs, COMMON_VAULT_ITEMS, APPLICATION_STAGES, type ApplicationStage } from '../contexts/SavedJobsContext';
+import {
+  Bookmark, CheckCircle2, Circle, ChevronDown,
+  ExternalLink, Printer, Shield, AlertTriangle, Info,
+} from 'lucide-react';
+import { useSavedJobs, COMMON_VAULT_ITEMS, type ApplicationStage, APPLICATION_STAGES } from '../contexts/SavedJobsContext';
+import type { ApplicationStatus } from '../types/job';
+import { APPLICATION_STATUS_FLOW, APPLICATION_STATUS_LABELS } from '../types/job';
 import { DEMO_JOBS } from '../data/jobs';
 import type { Job } from '../types/job';
 import { formatDate, getDeadlineInfo } from '../utils/dateUtils';
 import { clsx } from 'clsx';
 
+const STATUS_COLORS: Record<ApplicationStatus, string> = {
+  interested:             'bg-slate-100 text-slate-700 border-slate-300 dark:bg-slate-800 dark:text-slate-300',
+  preparing:              'bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900/30 dark:text-blue-300',
+  ready_to_apply:         'bg-indigo-100 text-indigo-800 border-indigo-300 dark:bg-indigo-900/30 dark:text-indigo-300',
+  applied_by_user:        'bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-emerald-900/30 dark:text-emerald-300',
+  admit_card_available:   'bg-teal-100 text-teal-800 border-teal-300 dark:bg-teal-900/30 dark:text-teal-300',
+  examination_completed:  'bg-violet-100 text-violet-800 border-violet-300 dark:bg-violet-900/30 dark:text-violet-300',
+  result_available:       'bg-amber-100 text-amber-800 border-amber-300 dark:bg-amber-900/30 dark:text-amber-300',
+  not_interested:         'bg-slate-100 text-slate-400 border-slate-200 dark:bg-slate-800 dark:text-slate-500',
+  withdrawn:              'bg-rose-50 text-rose-600 border-rose-200 dark:bg-rose-900/20 dark:text-rose-400',
+  cancelled:              'bg-rose-100 text-rose-700 border-rose-300 dark:bg-rose-900/30 dark:text-rose-300',
+};
+
+const ITEM_TYPE_LABELS: Record<string, { label: string; color: string; required: boolean }> = {
+  required_by_notice: { label: 'Required by Notice', color: 'text-rose-700 dark:text-rose-400', required: true },
+  conditional_requirement: { label: 'Conditional', color: 'text-amber-700 dark:text-amber-400', required: false },
+  recommended_preparation: { label: 'Recommended', color: 'text-blue-600 dark:text-blue-400', required: false },
+  user_added: { label: 'Personal Note', color: 'text-slate-500 dark:text-slate-400', required: false },
+};
+
 export function SavedPage() {
-  const { savedIds, jobStageById, setJobStage, toggleCheck, isChecked } = useSavedJobs();
+  const { savedIds, jobStatusById, jobStageById, setJobStage, setJobStatus, toggleCheck, isChecked } = useSavedJobs();
 
   const savedJobs = savedIds
     .map((id) => DEMO_JOBS.find((j) => j.id === id))
@@ -21,6 +50,16 @@ export function SavedPage() {
 
   return (
     <main className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+      {/* Spec disclaimer — spec §3: never treat button click as proof of submission */}
+      <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 text-xs text-amber-800 dark:text-amber-200">
+        <Info size={14} className="shrink-0 mt-0.5 text-amber-600 dark:text-amber-400" />
+        <span>
+          Marking a checklist item complete does <strong>not</strong> mean your application was submitted
+          to the government portal. Only the official portal can confirm submission.
+          Always verify on the official website before the deadline.
+        </span>
+      </div>
+
       {/* Document Vault */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {/* Vault Checklist (2 cols) */}
@@ -103,7 +142,16 @@ export function SavedPage() {
         ) : (
           <div className="space-y-4">
             {savedJobs.map((job) => (
-              <SavedJobCard key={job.id} job={job} stage={jobStageById[job.id] ?? 'Interested'} setJobStage={setJobStage} isChecked={isChecked} toggleCheck={toggleCheck} />
+              <SavedJobCard
+                key={job.id}
+                job={job}
+                stage={jobStageById[job.id] ?? 'Interested'}
+                status={jobStatusById[job.id] ?? 'interested'}
+                setJobStage={setJobStage}
+                setJobStatus={setJobStatus}
+                isChecked={isChecked}
+                toggleCheck={toggleCheck}
+              />
             ))}
           </div>
         )}
@@ -115,13 +163,17 @@ export function SavedPage() {
 function SavedJobCard({
   job,
   stage,
+  status,
   setJobStage,
+  setJobStatus,
   isChecked,
   toggleCheck,
 }: {
   job: Job;
   stage: ApplicationStage;
+  status: ApplicationStatus;
   setJobStage: (id: string, stage: ApplicationStage) => void;
+  setJobStatus: (id: string, status: ApplicationStatus) => void;
   isChecked: (k: string) => boolean;
   toggleCheck: (k: string) => void;
 }) {
@@ -131,6 +183,8 @@ function SavedJobCard({
   const checklist = job.checklist ?? [];
   const doneCount = checklist.filter((_, i) => isChecked(`${job.id}::${i}`)).length;
 
+  const isTerminal = ['not_interested', 'withdrawn', 'cancelled'].includes(status);
+
   return (
     <div id={`saved-${job.id}`} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-sm overflow-hidden">
       {/* Header */}
@@ -139,40 +193,106 @@ function SavedJobCard({
           <div>
             <h4 className="font-bold text-sm text-slate-900 dark:text-white leading-snug">{job.title}</h4>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{job.department}</p>
+            {job.advtNo && (
+              <p className="text-[10px] font-mono text-slate-400 mt-0.5">{job.advtNo}</p>
+            )}
           </div>
           <div className="flex items-center gap-2 flex-wrap">
+            {/* Stale indicator — spec §3 */}
+            {job._stale && (
+              <span className="flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-lg border bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-300 dark:border-amber-700">
+                <AlertTriangle size={10} />
+                Data not recently verified
+              </span>
+            )}
             <span className={clsx(
               'text-xs font-semibold px-2 py-1 rounded-lg border',
-              deadline.urgency === 'critical' ? 'bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-900/20 dark:text-rose-300 dark:border-rose-700' : 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-300 dark:border-amber-700'
+              deadline.urgency === 'critical'
+                ? 'bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-900/20 dark:text-rose-300 dark:border-rose-700'
+                : deadline.daysLeft < 0
+                ? 'bg-slate-50 text-slate-500 border-slate-200 dark:bg-slate-800 dark:text-slate-400'
+                : 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-300 dark:border-amber-700',
             )}>
-              ⏳ {deadline.daysLeft >= 0 ? `${deadline.daysLeft} days left` : 'Closed'} · {formatDate(job.importantDates.applicationEnd)}
+              ⏳ {deadline.daysLeft >= 0 ? `${deadline.daysLeft} days left` : 'Deadline passed'} · {formatDate(job.importantDates.applicationEnd)}
             </span>
           </div>
         </div>
 
-        {/* Stage pipeline */}
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">Application Stage</p>
+        {/* Full spec application status machine */}
+        <div className="mb-3">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5">Application Status</p>
           <div className="flex gap-1 flex-wrap">
-            {APPLICATION_STAGES.map((s, i) => (
+            {APPLICATION_STATUS_FLOW.map((s) => {
+              const isCurrent = s === status;
+              const flowIdx = APPLICATION_STATUS_FLOW.indexOf(s);
+              const currentIdx = APPLICATION_STATUS_FLOW.indexOf(status);
+              const isPast = flowIdx < currentIdx;
+              return (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setJobStatus(job.id, s)}
+                  title={APPLICATION_STATUS_LABELS[s]}
+                  className={clsx(
+                    'px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all',
+                    isCurrent
+                      ? `${STATUS_COLORS[s]} border-current shadow-sm`
+                      : isPast
+                      ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-700'
+                      : 'bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700 hover:border-slate-300',
+                  )}
+                >
+                  {APPLICATION_STATUS_LABELS[s]}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Terminal states */}
+          <div className="flex gap-1 mt-1.5 flex-wrap">
+            {(['not_interested', 'withdrawn', 'cancelled'] as ApplicationStatus[]).map(s => (
               <button
                 key={s}
                 type="button"
-                onClick={() => setJobStage(job.id, s)}
+                onClick={() => setJobStatus(job.id, s)}
                 className={clsx(
-                  'px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all',
-                  i === stageIdx
-                    ? 'bg-indigo-600 text-white border-indigo-600'
-                    : i < stageIdx
-                    ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-700'
-                    : 'bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700 hover:border-slate-300',
+                  'px-2.5 py-0.5 rounded-full text-[9px] font-semibold border transition-all',
+                  status === s
+                    ? `${STATUS_COLORS[s]} border-current`
+                    : 'bg-white dark:bg-slate-900 text-slate-400 border-slate-200 dark:border-slate-700 hover:border-slate-300',
                 )}
               >
-                {s}
+                {APPLICATION_STATUS_LABELS[s]}
               </button>
             ))}
           </div>
         </div>
+
+        {/* Legacy stage pipeline (kept for backward compat display) */}
+        {!isTerminal && (
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">Quick Stage</p>
+            <div className="flex gap-1 flex-wrap">
+              {APPLICATION_STAGES.map((s, i) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setJobStage(job.id, s)}
+                  className={clsx(
+                    'px-2.5 py-1 rounded-full text-[10px] font-semibold border transition-all',
+                    i === stageIdx
+                      ? 'bg-indigo-600 text-white border-indigo-600'
+                      : i < stageIdx
+                      ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-700'
+                      : 'bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-700 hover:border-slate-300',
+                  )}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Checklist toggle */}
@@ -187,29 +307,49 @@ function SavedJobCard({
             {expanded ? <ChevronDown size={14} /> : <ChevronDown size={14} className="rotate-[-90deg]" />}
           </button>
           {expanded && (
-            <div className="px-4 pb-4 pt-2 grid sm:grid-cols-2 gap-2">
-              {checklist.map((item, i) => {
-                const key = `${job.id}::${i}`;
-                const done = isChecked(key);
-                return (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => toggleCheck(key)}
-                    className={clsx(
-                      'flex items-start gap-2.5 p-2.5 rounded-xl border text-left text-xs transition-all',
-                      done
-                        ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300'
-                        : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-300',
-                    )}
-                  >
-                    {done
-                      ? <CheckCircle2 size={14} className="shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400" />
-                      : <Circle size={14} className="shrink-0 mt-0.5 text-slate-300 dark:text-slate-600" />}
-                    {item}
-                  </button>
-                );
-              })}
+            <div className="px-4 pb-4 pt-2 space-y-2">
+              {/* Item type legend */}
+              <div className="flex flex-wrap gap-2 mb-2 text-[10px]">
+                {Object.entries(ITEM_TYPE_LABELS).map(([type, cfg]) => (
+                  <span key={type} className={clsx('font-semibold', cfg.color)}>
+                    {cfg.required ? '* ' : ''}{cfg.label}
+                  </span>
+                ))}
+              </div>
+              <div className="grid sm:grid-cols-2 gap-2">
+                {checklist.map((item, i) => {
+                  const key = `${job.id}::${i}`;
+                  const done = isChecked(key);
+                  // Try to parse item type if item is an object (future API support)
+                  const itemLabel = typeof item === 'string' ? item : (item as any).label || String(item);
+                  const itemType = typeof item === 'object' ? (item as any).item_type || 'recommended_preparation' : 'recommended_preparation';
+                  const typeCfg = ITEM_TYPE_LABELS[itemType] || ITEM_TYPE_LABELS.recommended_preparation;
+
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => toggleCheck(key)}
+                      className={clsx(
+                        'flex items-start gap-2.5 p-2.5 rounded-xl border text-left text-xs transition-all',
+                        done
+                          ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300'
+                          : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-300',
+                      )}
+                    >
+                      {done
+                        ? <CheckCircle2 size={14} className="shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400" />
+                        : <Circle size={14} className="shrink-0 mt-0.5 text-slate-300 dark:text-slate-600" />}
+                      <div>
+                        <p className="leading-snug">{itemLabel}</p>
+                        <p className={clsx('text-[9px] font-semibold mt-0.5', typeCfg.color)}>
+                          {typeCfg.label}
+                        </p>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           )}
         </>
@@ -225,7 +365,7 @@ function SavedJobCard({
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition"
           >
             <ExternalLink size={12} />
-            Apply Online
+            Apply Online (Official Portal Only)
           </a>
         </div>
       )}
@@ -292,7 +432,7 @@ function OJASPhotoChecker() {
             'mt-3 p-3 rounded-xl text-[10px] whitespace-pre-wrap font-mono border leading-relaxed',
             status === 'pass'
               ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300'
-              : 'bg-rose-50 dark:bg-rose-900/20 border-rose-200 dark:border-rose-700 text-rose-800 dark:text-rose-300'
+              : 'bg-rose-50 dark:bg-rose-900/20 border-rose-200 dark:border-rose-700 text-rose-800 dark:text-rose-300',
           )}>
             {result}
           </pre>

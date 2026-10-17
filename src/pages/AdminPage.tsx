@@ -1,17 +1,57 @@
 // ============================================================
-// Admin & Publishing Studio Page
+// Admin & Publishing Studio Page (v3 — Full Spec §13)
 // Allows verified officers & editors to publish recruitment notices
 // and corrigenda alerts directly to the backend REST API.
+// Includes: publication state machine, review queue, audit log.
 // ============================================================
 import { useState } from 'react';
-import { ShieldCheck, PlusCircle, AlertCircle, FileText, CheckCircle2, Key, RefreshCw } from 'lucide-react';
+import { ShieldCheck, PlusCircle, AlertCircle, FileText, CheckCircle2, Key, RefreshCw, LayoutDashboard, ClipboardList } from 'lucide-react';
 import { DEMO_JOBS } from '../data/jobs';
+
+const PUBLICATION_STATES = [
+  { id: 'discovered', label: 'Discovered', color: 'bg-slate-100 text-slate-600' },
+  { id: 'processing', label: 'Processing', color: 'bg-blue-100 text-blue-700' },
+  { id: 'extracted', label: 'Extracted', color: 'bg-indigo-100 text-indigo-700' },
+  { id: 'needs_review', label: 'Needs Review', color: 'bg-amber-100 text-amber-700' },
+  { id: 'verified', label: 'Verified', color: 'bg-teal-100 text-teal-700' },
+  { id: 'published', label: 'Published', color: 'bg-emerald-100 text-emerald-700' },
+  { id: 'updated', label: 'Updated', color: 'bg-cyan-100 text-cyan-700' },
+  { id: 'expired', label: 'Expired', color: 'bg-slate-200 text-slate-500' },
+  { id: 'cancelled', label: 'Cancelled', color: 'bg-rose-100 text-rose-700' },
+];
 
 export function AdminPage() {
   const [apiKey, setApiKey] = useState('jobdirect-secret-key-2026');
-  const [activeTab, setActiveTab] = useState<'recruitment' | 'corrigendum'>('recruitment');
+  const [activeTab, setActiveTab] = useState<'recruitment' | 'corrigendum' | 'review'>('recruitment');
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [dashboardData, setDashboardData] = useState<any>(null);
+  const [reviewTasks, setReviewTasks] = useState<any[]>([]);
+  const [isFetchingDashboard, setIsFetchingDashboard] = useState(false);
+
+  async function fetchDashboard() {
+    setIsFetchingDashboard(true);
+    try {
+      const res = await fetch('/api/v1/admin/dashboard', {
+        headers: { 'x-api-key': apiKey },
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      setDashboardData(data);
+
+      const queueRes = await fetch('/api/v1/admin/review-queue', {
+        headers: { 'x-api-key': apiKey },
+      });
+      if (queueRes.ok) {
+        const queueData = await queueRes.json();
+        setReviewTasks(queueData.review_tasks || []);
+      }
+    } catch (err: any) {
+      setStatusMessage({ type: 'error', text: `Failed to fetch dashboard: ${err.message}` });
+    } finally {
+      setIsFetchingDashboard(false);
+    }
+  }
 
   // Recruitment form state
   const [recForm, setRecForm] = useState(() => ({
@@ -218,6 +258,16 @@ export function AdminPage() {
           }`}
         >
           <AlertCircle size={15} /> Publish Official Corrigendum
+        </button>
+        <button
+          onClick={() => { setActiveTab('review'); setStatusMessage(null); fetchDashboard(); }}
+          className={`px-4 py-2.5 text-sm font-semibold border-b-2 flex items-center gap-2 transition-all ${
+            activeTab === 'review'
+              ? 'border-amber-600 text-amber-600 dark:text-amber-400'
+              : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+          }`}
+        >
+          <LayoutDashboard size={15} /> Review Queue & Audit
         </button>
       </div>
 
@@ -563,6 +613,108 @@ export function AdminPage() {
             </button>
           </div>
         </form>
+      )}
+      {/* Tab 3: Review Queue & Publication State Machine */}
+      {activeTab === 'review' && (
+        <div className="space-y-5">
+          {/* Publication State Machine diagram */}
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+            <h2 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2">
+              <ClipboardList size={15} className="text-amber-600" />
+              Publication State Machine
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {PUBLICATION_STATES.map((state, i) => (
+                <div key={state.id} className="flex items-center gap-1">
+                  <span className={`px-3 py-1.5 rounded-full text-xs font-semibold ${state.color}`}>
+                    {state.label}
+                  </span>
+                  {i < PUBLICATION_STATES.length - 2 && (
+                    <span className="text-slate-300 dark:text-slate-600 text-sm">→</span>
+                  )}
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-slate-400 dark:text-slate-500 mt-3">
+              Records advance through states. Automated extraction can populate fields, but manual
+              verification is required before publishing. Every state change is recorded in the audit log.
+            </p>
+          </div>
+
+          {/* Dashboard stats */}
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                <LayoutDashboard size={15} className="text-blue-600" />
+                Server Dashboard (API v1)
+              </h2>
+              <button
+                type="button"
+                onClick={fetchDashboard}
+                disabled={isFetchingDashboard}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-xs font-semibold hover:bg-blue-100 transition disabled:opacity-50"
+              >
+                <RefreshCw size={12} className={isFetchingDashboard ? 'animate-spin' : ''} />
+                Refresh
+              </button>
+            </div>
+
+            {dashboardData ? (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {Object.entries(dashboardData.recruitment_counts || {}).map(([status, count]: any) => (
+                  <div key={status} className="bg-slate-50 dark:bg-slate-800 rounded-xl p-3 text-center">
+                    <div className="text-xl font-bold text-slate-900 dark:text-white">{count}</div>
+                    <div className="text-[10px] text-slate-500 capitalize mt-0.5">{status.replace(/_/g, ' ')}</div>
+                  </div>
+                ))}
+                <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-3 text-center border border-amber-200 dark:border-amber-700">
+                  <div className="text-xl font-bold text-amber-700 dark:text-amber-300">{dashboardData.pending_reviews}</div>
+                  <div className="text-[10px] text-amber-600 mt-0.5">Pending Reviews</div>
+                </div>
+                <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-3 text-center">
+                  <div className="text-xl font-bold text-blue-700 dark:text-blue-300">{dashboardData.total_saved_applications}</div>
+                  <div className="text-[10px] text-blue-600 mt-0.5">Saved Applications</div>
+                </div>
+              </div>
+            ) : (
+              <p className="text-xs text-slate-400 italic">Click Refresh to load server data (requires server running on port 3000).</p>
+            )}
+          </div>
+
+          {/* Review queue */}
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+            <h2 className="text-sm font-bold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
+              <AlertCircle size={15} className="text-amber-600" />
+              Pending Review Tasks ({reviewTasks.length})
+            </h2>
+            {reviewTasks.length === 0 ? (
+              <div className="text-center py-8 text-slate-400">
+                <CheckCircle2 size={28} className="mx-auto mb-2 text-emerald-400" />
+                <p className="text-sm">No pending review tasks</p>
+                <p className="text-xs mt-1 text-slate-400">{dashboardData ? 'All clear!' : 'Fetch from server to see pending items'}</p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {reviewTasks.map((task) => (
+                  <div key={task.id} className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-700 rounded-xl p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-xs font-bold text-slate-800 dark:text-slate-200">{task.task_type.replace(/_/g, ' ')}</p>
+                        <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">{task.reason}</p>
+                        {task.recruitment_id && (
+                          <p className="text-[10px] font-mono text-slate-400 mt-1">Recruitment: {task.recruitment_id}</p>
+                        )}
+                      </div>
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
+                        {task.status}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       )}
     </main>
   );

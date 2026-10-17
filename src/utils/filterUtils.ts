@@ -98,6 +98,7 @@ export const STATUS_LABELS: Record<RecruitmentStatus, string> = {
   result_declared: 'Result Declared',
   upcoming: 'Upcoming',
   on_hold: 'On Hold',
+  cancelled: 'Cancelled',
 };
 
 export const SORT_LABELS: Record<SortOption, string> = {
@@ -113,7 +114,8 @@ export const STATUS_COLORS: Record<RecruitmentStatus, string> = {
   closed: 'bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-400',
   result_declared: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300',
   upcoming: 'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300',
-  on_hold: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300',
+  on_hold: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
+  cancelled: 'bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300',
 };
 
 export const SECTOR_ICONS: Record<SectorFilter, string> = {

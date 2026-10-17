@@ -1,30 +1,36 @@
 // ============================================================
 // Main Application Component
 // Providers: Theme, CandidateProfile (GAD Engine), SavedJobs (Tracker)
-// Navigation: Dashboard, Corrigenda Monitor, Saved Applications & Vault, Admin Studio
+// Navigation: Dashboard, Corrigenda Monitor, Saved Applications & Vault,
+//             Alerts & Notifications, Admin Studio
 // ============================================================
 import { useState } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { CandidateProfileProvider } from './contexts/CandidateProfileContext';
 import { SavedJobsProvider } from './contexts/SavedJobsContext';
 import { Navbar, type NavPage } from './components/Navbar';
+import { MobileBottomNav } from './components/MobileBottomNav';
 import { DashboardPage } from './pages/DashboardPage';
 import { CorrigendumPage } from './pages/CorrigendumPage';
 import { SavedPage } from './pages/SavedPage';
+import { NotificationsPage } from './pages/NotificationsPage';
 import { AdminPage } from './pages/AdminPage';
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<NavPage>('dashboard');
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-200 flex flex-col justify-between">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-200 flex flex-col justify-between pb-16 md:pb-0">
       <div>
         <Navbar currentPage={currentPage} onNavigate={setCurrentPage} />
         {currentPage === 'dashboard' && <DashboardPage />}
         {currentPage === 'corrigenda' && <CorrigendumPage />}
         {currentPage === 'saved' && <SavedPage />}
+        {currentPage === 'notifications' && <NotificationsPage />}
         {currentPage === 'admin' && <AdminPage />}
       </div>
+
+      <MobileBottomNav currentPage={currentPage} onNavigate={setCurrentPage} />
 
       <footer className="mt-16 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-10 px-4">
         <div className="max-w-7xl mx-auto">
@@ -38,7 +44,7 @@ function AppContent() {
                 </span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                Gujarat Recruitment Intelligence &amp; GAD Rule-Based Application Platform
+                Gujarat Recruitment Intelligence & GAD Rule-Based Application Platform
               </p>
             </div>
 
@@ -49,6 +55,8 @@ function AppContent() {
               <span>Official Notifications Only</span>
               <span className="w-px h-3 bg-slate-200 dark:bg-slate-700" />
               <span>Gujarat GAD Compliance</span>
+              <span className="w-px h-3 bg-slate-200 dark:bg-slate-700" />
+              <span>Three-Valued Eligibility Engine</span>
             </div>
           </div>
 
@@ -58,6 +66,7 @@ function AppContent() {
               All data is verified against official gazette notifications published on official portals
               including ojas.gujarat.gov.in, gpsc.gujarat.gov.in, and gsssb.gujarat.gov.in.
               Candidates must verify application details on official recruiting body websites before applying.
+              Eligibility assessments are indicative — the recruiting authority's decision takes precedence.
             </p>
           </div>
         </div>

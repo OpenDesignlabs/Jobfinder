@@ -13,12 +13,13 @@ import {
   Moon,
   Menu,
   X,
+  Bell,
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useSavedJobs } from '../contexts/SavedJobsContext';
 import { DEMO_JOBS } from '../data/jobs';
 
-export type NavPage = 'dashboard' | 'corrigenda' | 'saved' | 'admin';
+export type NavPage = 'dashboard' | 'corrigenda' | 'saved' | 'notifications' | 'admin';
 
 interface NavbarProps {
   currentPage: NavPage;
@@ -114,6 +115,18 @@ export function Navbar({ currentPage, onNavigate }: NavbarProps) {
                 {savedIds.length}
               </span>
             )}
+          </button>
+
+          <button
+            onClick={() => handleNav('notifications')}
+            className={`px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
+              currentPage === 'notifications'
+                ? 'bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 font-bold'
+                : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+            }`}
+          >
+            <Bell size={15} />
+            <span>Alerts</span>
           </button>
 
           <button
@@ -216,6 +229,19 @@ export function Navbar({ currentPage, onNavigate }: NavbarProps) {
                 {savedIds.length}
               </span>
             )}
+          </button>
+
+          <button
+            onClick={() => handleNav('notifications')}
+            className={`w-full px-3.5 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-between text-left ${
+              currentPage === 'notifications'
+                ? 'bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400'
+                : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+            }`}
+          >
+            <span className="flex items-center gap-2">
+              <Bell size={16} /> Alerts & Updates (સૂચનાઓ)
+            </span>
           </button>
 
           <button

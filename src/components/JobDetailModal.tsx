@@ -1,6 +1,7 @@
 // ============================================================
 // JobDetailModal Component
 // Complete Gujarat Recruitment Details with GAD Eligibility Engine,
+// Three-valued rule-by-rule breakdown (pass/fail/unknown),
 // Corrigenda (સુધારા જાહેરાત) Diffs, Checklist, Timeline, & Save Actions.
 // ============================================================
 import {
@@ -18,6 +19,8 @@ import {
   Milestone,
   CheckSquare,
   AlertCircle,
+  HelpCircle,
+  XCircle,
 } from 'lucide-react';
 import { useEffect } from 'react';
 import type { Job, EducationFilter } from '../types/job';
@@ -25,7 +28,7 @@ import { STATUS_LABELS, STATUS_COLORS, SECTOR_LABELS, SECTOR_ICONS, EDUCATION_LA
 import { formatDate, getDeadlineInfo } from '../utils/dateUtils';
 import { OfficialLinkButton } from './OfficialLinkButton';
 import { useCandidateProfile } from '../contexts/CandidateProfileContext';
-import { evaluateGADEligibility } from '../utils/gadEligibilityUtils';
+import { evaluateGADEligibility, evaluateGADEligibilityV1 } from '../utils/gadEligibilityUtils';
 import { useSavedJobs } from '../contexts/SavedJobsContext';
 import { clsx } from 'clsx';
 
@@ -41,6 +44,7 @@ export function JobDetailModal({ job, onClose }: JobDetailModalProps) {
 
   const saved = isJobSaved(job.id);
   const gadResult = evaluateGADEligibility(job, profile);
+  const gadV1 = evaluateGADEligibilityV1(job, profile);
   const deadline = getDeadlineInfo(job.importantDates.applicationEnd);
 
   // Close on Escape
@@ -140,7 +144,7 @@ export function JobDetailModal({ job, onClose }: JobDetailModalProps) {
           <div className={clsx('rounded-2xl p-4 sm:p-5 border', gadResult.badgeClass)}>
             <div className="flex items-start gap-3">
               <Shield size={18} className="mt-0.5 shrink-0" />
-              <div>
+              <div className="flex-1">
                 <div className="font-bold text-sm sm:text-base mb-1">
                   Gujarat GAD Eligibility: {gadResult.badgeText}
                 </div>
@@ -152,9 +156,41 @@ export function JobDetailModal({ job, onClose }: JobDetailModalProps) {
                     Base Maximum Age: {job.maxAgeBase ?? job.ageLimit.max} yrs → With your Category/Special Relaxation: {gadResult.effectiveMaxAge} yrs (Gujarat GAD Rule Cap: 45 yrs)
                   </div>
                 )}
+
+                {/* Three-valued rule breakdown — spec §9 Step 6 */}
+                {gadV1.checks.length > 0 && (
+                  <div className="mt-3 space-y-1.5">
+                    <p className="text-[10px] font-bold uppercase tracking-wider opacity-70">Rule-by-Rule Assessment:</p>
+                    {gadV1.checks.map((check, i) => (
+                      <div key={i} className="flex items-start gap-2 bg-white/30 dark:bg-black/10 rounded-lg px-2.5 py-1.5 text-xs">
+                        {check.result === 'pass' && <CheckCircle2 size={13} className="shrink-0 mt-0.5 text-emerald-600" />}
+                        {check.result === 'fail' && <XCircle size={13} className="shrink-0 mt-0.5 text-rose-600" />}
+                        {check.result === 'unknown' && <HelpCircle size={13} className="shrink-0 mt-0.5 text-amber-600" />}
+                        <div>
+                          <span className="font-semibold capitalize">{check.rule.replace(/_/g, ' ')}</span>:
+                          <span className="ml-1 opacity-80">{check.reason}</span>
+                        </div>
+                      </div>
+                    ))}
+                    <p className="text-[10px] opacity-60 italic mt-1">
+                      Results are indicative. The recruiting authority's official decision takes precedence.
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
+
+          {/* Stale data warning — spec §3 */}
+          {job._stale && (
+            <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 text-xs text-amber-800 dark:text-amber-200">
+              <AlertTriangle size={14} className="shrink-0 mt-0.5 text-amber-600" />
+              <span>
+                <strong>Data not recently verified.</strong> The last source check for this recruitment is overdue.
+                Always confirm dates on the official portal before applying.
+              </span>
+            </div>
+          )}
 
           {/* Key stats row */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
