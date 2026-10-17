@@ -3,8 +3,9 @@
 // Provides quick 1-thumb native navigation on mobile devices.
 // ============================================================
 
-import { Briefcase, AlertCircle, Bookmark, Bell, ShieldCheck } from 'lucide-react';
+import { Briefcase, AlertCircle, Calculator, Bookmark, Bell } from 'lucide-react';
 import { useSavedJobs } from '../contexts/SavedJobsContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import { DEMO_JOBS } from '../data/jobs';
 import type { NavPage } from './Navbar';
 
@@ -15,6 +16,7 @@ interface MobileBottomNavProps {
 
 export function MobileBottomNav({ currentPage, onNavigate }: MobileBottomNavProps) {
   const { savedIds } = useSavedJobs();
+  const { t } = useLanguage();
 
   // Corrigenda count
   const totalCorrigenda = DEMO_JOBS.reduce(
@@ -28,11 +30,11 @@ export function MobileBottomNav({ currentPage, onNavigate }: MobileBottomNavProp
   }
 
   const navItems: { page: NavPage; label: string; icon: typeof Briefcase; badge?: number }[] = [
-    { page: 'dashboard', label: 'Recruitments', icon: Briefcase },
-    { page: 'corrigenda', label: 'Corrigenda', icon: AlertCircle, badge: totalCorrigenda },
-    { page: 'saved', label: 'Vault', icon: Bookmark, badge: savedIds.length },
-    { page: 'notifications', label: 'Alerts', icon: Bell },
-    { page: 'admin', label: 'Admin', icon: ShieldCheck },
+    { page: 'dashboard', label: t('Jobs', 'ભરતી'), icon: Briefcase },
+    { page: 'calculator', label: t('Calculator', 'પાત્રતા'), icon: Calculator },
+    { page: 'corrigenda', label: t('Corrigenda', 'સુધારા'), icon: AlertCircle, badge: totalCorrigenda },
+    { page: 'saved', label: t('Vault', 'વૉલ્ટ'), icon: Bookmark, badge: savedIds.length },
+    { page: 'notifications', label: t('Alerts', 'સૂચના'), icon: Bell },
   ];
 
   return (

@@ -22,6 +22,7 @@ import { JobDetailModal } from '../components/JobDetailModal';
 import { EmptyState } from '../components/EmptyState';
 import { CandidateProfileBar } from '../components/CandidateProfileBar';
 import { useCandidateProfile } from '../contexts/CandidateProfileContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import { evaluateGADEligibility } from '../utils/gadEligibilityUtils';
 
 const INITIAL_FILTERS: FilterState = {
@@ -32,14 +33,14 @@ const INITIAL_FILTERS: FilterState = {
 };
 
 const AGENCIES = [
-  { code: 'ALL', label: 'All Agencies' },
-  { code: 'GSSSB', label: 'GSSSB' },
-  { code: 'GPSC', label: 'GPSC' },
-  { code: 'GPRB', label: 'Police (GPRB)' },
-  { code: 'GPSSB', label: 'GPSSB (Panchayat)' },
-  { code: 'GHC', label: 'High Court' },
-  { code: 'GUVNL', label: 'Energy (DGVCL)' },
-  { code: 'SMC', label: 'Surat Municipal (SMC)' },
+  { code: 'ALL', labelEn: 'All Boards', labelGu: 'તમામ બોર્ડ' },
+  { code: 'GSSSB', labelEn: 'GSSSB (ગૌણ સેવા)', labelGu: 'ગૌણ સેવા (GSSSB)' },
+  { code: 'GPSC', labelEn: 'GPSC (જાહેર સેવા)', labelGu: 'GPSC આયોગ' },
+  { code: 'POLICE', labelEn: 'Police (LRB/PSI)', labelGu: 'પોલીસ (LRB/PSI)' },
+  { code: 'GPSSB', labelEn: 'GPSSB (Panchayat)', labelGu: 'પંચાયત (GPSSB)' },
+  { code: 'HIGH_COURT', labelEn: 'High Court', labelGu: 'ગુજરાત હાઇકોર્ટ' },
+  { code: 'POWER_CORP', labelEn: 'Energy (GETCO/DGVCL)', labelGu: 'ઊર્જા નિગમ (GETCO)' },
+  { code: 'SMC', labelEn: 'Municipal (SMC)', labelGu: 'મહાનગરપાલિકા' },
 ];
 
 export function DashboardPage() {
@@ -50,6 +51,7 @@ export function DashboardPage() {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
 
   const { profile } = useCandidateProfile();
+  const { isGujarati, t } = useLanguage();
 
   // Filter jobs by agency, standard filters, and optionally GAD eligibility
   const filteredJobs = useMemo(() => {
@@ -57,7 +59,14 @@ export function DashboardPage() {
 
     // Agency filter
     if (selectedAgency !== 'ALL') {
-      list = list.filter((j) => (j.agency || '').toUpperCase() === selectedAgency.toUpperCase());
+      const target = selectedAgency.toUpperCase();
+      list = list.filter((j) => {
+        const a = (j.agency || '').toUpperCase();
+        if (target === 'POLICE') return a === 'POLICE' || a === 'GPRB';
+        if (target === 'HIGH_COURT') return a === 'HIGH_COURT' || a === 'GHC';
+        if (target === 'POWER_CORP') return a === 'POWER_CORP' || a === 'GUVNL';
+        return a === target;
+      });
     }
 
     // Standard filters (search query, sector, status, education)
@@ -173,7 +182,7 @@ export function DashboardPage() {
                   : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-blue-300'
               }`}
             >
-              {ag.label}
+              {isGujarati ? ag.labelGu : ag.labelEn}
             </button>
           ))}
 
@@ -188,7 +197,9 @@ export function DashboardPage() {
             }`}
           >
             <CheckCircle size={13} />
-            {onlyEligible ? 'Showing Only Eligible' : 'Filter Eligible for Me'}
+            {onlyEligible
+              ? t('Showing Only Eligible', 'માત્ર પાત્ર દર્શાવો છો')
+              : t('Filter Eligible for Me', 'મારી પાત્રતા મુજબ ફિલ્ટર')}
           </button>
         </div>
 

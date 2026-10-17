@@ -34,7 +34,7 @@ import { clsx } from 'clsx';
 
 interface JobDetailModalProps {
   job: Job;
-  selectedEducation: EducationFilter[];
+  selectedEducation?: EducationFilter[];
   onClose: () => void;
 }
 

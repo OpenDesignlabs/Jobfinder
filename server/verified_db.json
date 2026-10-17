@@ -1,5 +1,350 @@
 [
   {
+    "id": "gsssb-cce-2026",
+    "advtNo": "GSSSB/202627/212",
+    "agency": "GSSSB",
+    "agencyFull": "Gujarat Subordinate Service Selection Board (ગૌણ સેવા પસંદગી મંડળ)",
+    "title": "Gujarat Combined Competitive Examination (CCE) Group A & Group B",
+    "titleGuj": "ગુજરાત ગૌણ સેવા સંયુક્ત સ્પર્ધાત્મક પરીક્ષા (CCE) ગ્રૂપ-A અને ગ્રૂપ-B",
+    "vacancies": 5554,
+    "publishedDate": "2026-10-01",
+    "closingDate": "2026-11-15",
+    "daysLeft": 29,
+    "lastVerified": "15 Oct 2026, 17:30 IST",
+    "officialBoardUrl": "https://gsssb.gujarat.gov.in",
+    "officialApplyUrl": "https://ojas.gujarat.gov.in",
+    "minAge": 20,
+    "maxAgeBase": 35,
+    "requiredEdu": [
+      "GRADUATE"
+    ],
+    "eduSummaryEn": "Bachelor Degree in any discipline from a recognized University or equivalent.",
+    "eduSummaryGuj": "માન્ય યુનિવર્સિટીમાંથી કોઈપણ પ્રવાહમાં સ્નાતક (ગ્રેજ્યુએટ) ની પદવી.",
+    "feeSummary": "General/Unreserved: ₹100 + Charges. SC/ST/SEBC/EWS/Ex-Servicemen: Exempted.",
+    "publication_status": "published",
+    "version": 2,
+    "corrigenda": [
+      {
+        "corrId": "corr-gsssb-cce-01",
+        "date": "14 Oct 2026",
+        "category": "DEADLINE",
+        "type": "Application Closing Date Extended by 21 Days to 15-Nov-2026",
+        "sectionCitation": "GSSSB Corrigendum Notice #2 (CCE Para 4)",
+        "beforeText": "Original Deadline: 25-Oct-2026 (23:59 Hrs)",
+        "afterText": "Revised Deadline: 15-Nov-2026 (23:59 Hrs)",
+        "summaryGuj": "અરજી કરવાની છેલ્લી તારીખમાં ૨૧ દિવસનો વધારો - નવી છેલ્લી તારીખ ૧૫-નવેમ્બર-૨૦૨૬",
+        "newClosingDate": "2026-11-15"
+      }
+    ]
+  },
+  {
+    "id": "gpsc-class-1-2-2026",
+    "advtNo": "GPSC/202627/01",
+    "agency": "GPSC",
+    "agencyFull": "Gujarat Public Service Commission (ગુજરાત જાહેર સેવા આયોગ)",
+    "title": "Gujarat Administrative Service (Class 1) & Gujarat Civil Service (Class 1 & 2)",
+    "titleGuj": "ગુજરાત વહીવટી સેવા (વર્ગ-૧) અને ગુજરાત મુલ્કી સેવા (વર્ગ-૧ અને વર્ગ-૨)",
+    "vacancies": 345,
+    "publishedDate": "2026-09-15",
+    "closingDate": "2026-10-31",
+    "daysLeft": 14,
+    "lastVerified": "12 Oct 2026, 14:00 IST",
+    "officialBoardUrl": "https://gpsc.gujarat.gov.in",
+    "officialApplyUrl": "https://gpsc-ojas.gujarat.gov.in",
+    "minAge": 20,
+    "maxAgeBase": 35,
+    "requiredEdu": [
+      "GRADUATE"
+    ],
+    "eduSummaryEn": "Graduate degree in any stream. Final year students eligible to appear.",
+    "eduSummaryGuj": "કોઈપણ શાખામાં સ્નાતકની પદવી.",
+    "feeSummary": "₹100 for General male candidates. Women and all reserved categories free.",
+    "publication_status": "published",
+    "version": 1
+  },
+  {
+    "id": "police-lrb-constable-2026",
+    "advtNo": "LRB/202627/01",
+    "agency": "POLICE",
+    "agencyFull": "Gujarat Police Recruitment Board (પોલીસ ભરતી બોર્ડ)",
+    "title": "Gujarat Police Lokrakshak (Unarmed & Armed Constable, SRPF, Jail Sepoy)",
+    "titleGuj": "ગુજરાત પોલીસ લોકરક્ષક ભરતી (બિન-હથિયારી/હથિયારી કોન્સ્ટેબલ, SRPF અને જેલ સિપાહી)",
+    "vacancies": 12472,
+    "publishedDate": "2026-10-05",
+    "closingDate": "2026-11-20",
+    "daysLeft": 34,
+    "lastVerified": "16 Oct 2026, 12:15 IST",
+    "officialBoardUrl": "https://lrbgujarat2026.in",
+    "officialApplyUrl": "https://ojas.gujarat.gov.in",
+    "minAge": 18,
+    "maxAgeBase": 33,
+    "requiredEdu": [
+      "HSC",
+      "GRADUATE"
+    ],
+    "eduSummaryEn": "12th Standard Passed (HSC) from Gujarat Secondary & Higher Secondary Board or equivalent.",
+    "eduSummaryGuj": "ગુજરાત માધ્યમિક અને ઉચ્ચતર માધ્યમિક શિક્ષણ બોર્ડમાંથી ધોરણ ૧૨ પાસ અથવા સમકક્ષ.",
+    "feeSummary": "₹100 for General male. SC/ST/SEBC/EWS/Female candidates free.",
+    "publication_status": "published",
+    "version": 2,
+    "corrigenda": [
+      {
+        "corrId": "corr-police-lrb-01",
+        "date": "09 Oct 2026",
+        "category": "ELIGIBILITY",
+        "type": "PET Running Marks Removed from Merit; Written Test Revised to 200 Marks",
+        "sectionCitation": "Home Dept Amendment 2026, Rule 8 & 12",
+        "beforeText": "Physical test carried 25 marks; Combined total was 125 marks.",
+        "afterText": "Physical test is Qualifying only. Objective Written exam is 200 Marks (3 Hours duration).",
+        "summaryGuj": "શારીરિક કસોટી (દોડ) ના ગુણ મેરિટમાંથી રદ; લેખિત પરીક્ષા હવે ૨૦૦ ગુણની રહેશે"
+      }
+    ]
+  },
+  {
+    "id": "police-psi-cadre-2026",
+    "advtNo": "PSIRB/202627/01",
+    "agency": "POLICE",
+    "agencyFull": "Police Sub Inspector Recruitment Board (PSIRB)",
+    "title": "Police Sub Inspector (Unarmed PSI, Armed PSI, Platoon Commander, Intelligence Officer)",
+    "titleGuj": "પોલીસ સબ ઇન્સ્પેક્ટર (બિન-હથિયારી PSI, હથિયારી PSI, પ્લાટૂન કમાન્ડર, ઇન્ટેલિજન્સ ઓફિસર)",
+    "vacancies": 824,
+    "publishedDate": "2026-10-10",
+    "closingDate": "2026-11-25",
+    "daysLeft": 39,
+    "lastVerified": "14 Oct 2026, 11:20 IST",
+    "officialBoardUrl": "https://psirbgujarat2026.in",
+    "officialApplyUrl": "https://ojas.gujarat.gov.in",
+    "minAge": 21,
+    "maxAgeBase": 35,
+    "requiredEdu": [
+      "GRADUATE"
+    ],
+    "eduSummaryEn": "Graduation in any stream from recognized university. Height standards apply.",
+    "eduSummaryGuj": "કોઈપણ પ્રવાહમાં સ્નાતક. ઊંચાઈ: સામાન્ય પુરુષ ૧૬૫ સે.મી., મહિલા ૧૫૮ સે.મી.",
+    "feeSummary": "₹100 for Unreserved. Reserved & Female candidates free.",
+    "publication_status": "published",
+    "version": 1
+  },
+  {
+    "id": "gpssb-talati-mantri-2026",
+    "advtNo": "GPSSB/202627/10",
+    "agency": "GPSSB",
+    "agencyFull": "Gujarat Panchayat Service Selection Board (પંચાયત પસંદગી બોર્ડ)",
+    "title": "Village Panchayat Secretary (Talati-cum-Mantri) Class 3",
+    "titleGuj": "ગ્રામ પંચાયત સેક્રેટરી (તલાટી-કમ-મંત્રી) વર્ગ-૩",
+    "vacancies": 3437,
+    "publishedDate": "2026-10-12",
+    "closingDate": "2026-11-18",
+    "daysLeft": 32,
+    "lastVerified": "15 Oct 2026, 16:00 IST",
+    "officialBoardUrl": "https://gpssb.gujarat.gov.in",
+    "officialApplyUrl": "https://ojas.gujarat.gov.in",
+    "minAge": 18,
+    "maxAgeBase": 36,
+    "requiredEdu": [
+      "HSC",
+      "GRADUATE"
+    ],
+    "eduSummaryEn": "12th Standard (HSC) pass from recognized board with basic computer knowledge.",
+    "eduSummaryGuj": "માન્ય બોર્ડમાંથી ધોરણ ૧૨ પાસ અને કોમ્પ્યુટરનું પ્રાથમિક જ્ઞાન.",
+    "feeSummary": "₹100 for General. Exemption for all reserved categories.",
+    "publication_status": "published",
+    "version": 2,
+    "corrigenda": [
+      {
+        "corrId": "corr-gpssb-talati-01",
+        "date": "11 Oct 2026",
+        "category": "DEADLINE",
+        "type": "Talati-cum-Mantri Application Extended to 18-Nov-2026",
+        "sectionCitation": "GPSSB Corrigendum Notice #1, Para 2",
+        "beforeText": "Closing Date: 02-Nov-2026",
+        "afterText": "Revised Closing Date: 18-Nov-2026",
+        "summaryGuj": "તલાટી-કમ-મંત્રી ભરતીમાં અરજી કરવાની મુદત ૧૮-નવેમ્બર સુધી લંબાવવામાં આવી",
+        "newClosingDate": "2026-11-18"
+      }
+    ]
+  },
+  {
+    "id": "gpssb-junior-clerk-2026",
+    "advtNo": "GPSSB/202627/12",
+    "agency": "GPSSB",
+    "agencyFull": "Gujarat Panchayat Service Selection Board (પંચાયત બોર્ડ)",
+    "title": "Junior Clerk (Panchayat Administrative Service)",
+    "titleGuj": "જુનિયર ક્લાર્ક (વહીવટ / હિસાબ) પંચાયત સેવા",
+    "vacancies": 2185,
+    "publishedDate": "2026-09-28",
+    "closingDate": "2026-10-30",
+    "daysLeft": 13,
+    "lastVerified": "10 Oct 2026, 18:00 IST",
+    "officialBoardUrl": "https://gpssb.gujarat.gov.in",
+    "officialApplyUrl": "https://ojas.gujarat.gov.in",
+    "minAge": 18,
+    "maxAgeBase": 36,
+    "requiredEdu": [
+      "HSC",
+      "GRADUATE"
+    ],
+    "eduSummaryEn": "Higher Secondary Certificate (12th Std) or equivalent.",
+    "eduSummaryGuj": "ધોરણ ૧૨ (HSC) પાસ અથવા માન્ય સમકક્ષ લાયકાત.",
+    "feeSummary": "₹100 for General. Exempted for reserved categories.",
+    "publication_status": "published",
+    "version": 1
+  },
+  {
+    "id": "hc-guj-dyso-2026",
+    "advtNo": "HCG/202627/04",
+    "agency": "HIGH_COURT",
+    "agencyFull": "High Court of Gujarat (ગુજરાત વડી અદાલત)",
+    "title": "Deputy Section Officer (Dy. SO) High Court of Gujarat",
+    "titleGuj": "નાયબ સેક્શન અધિકારી (Dy. SO) ગુજરાત વડી અદાલત",
+    "vacancies": 192,
+    "publishedDate": "2026-10-02",
+    "closingDate": "2026-11-04",
+    "daysLeft": 18,
+    "lastVerified": "15 Oct 2026, 19:10 IST",
+    "officialBoardUrl": "https://gujarathighcourt.nic.in",
+    "officialApplyUrl": "https://hc-ojas.gujarat.gov.in",
+    "minAge": 21,
+    "maxAgeBase": 35,
+    "requiredEdu": [
+      "GRADUATE"
+    ],
+    "eduSummaryEn": "Bachelor Degree from recognized university. English & Gujarati typing skills required.",
+    "eduSummaryGuj": "કોઈપણ માન્ય યુનિવર્સિટીમાંથી સ્નાતક. ગુજરાતી અને અંગ્રેજી ભાષાનું સારું જ્ઞાન.",
+    "feeSummary": "₹1,000 for General. ₹500 for Reserved categories (SC/ST/SEBC/EWS/PwD).",
+    "publication_status": "published",
+    "version": 2,
+    "corrigenda": [
+      {
+        "corrId": "corr-hc-dyso-01",
+        "date": "15 Oct 2026",
+        "category": "DEADLINE",
+        "type": "High Court Dy. SO Online Registration Extended to 04-Nov-2026",
+        "sectionCitation": "HC Notification No. RC/1434/2026, Clause 3",
+        "beforeText": "Closing Date: 22-Oct-2026",
+        "afterText": "Revised Closing Date: 04-Nov-2026",
+        "summaryGuj": "હાઇકોર્ટ Dy. SO ની ઓનલાઇન રજીસ્ટ્રેશન મુદત લંબાવી ૦૪-નવેમ્બર-૨૦૨૬ કરવામાં આવી",
+        "newClosingDate": "2026-11-04"
+      }
+    ]
+  },
+  {
+    "id": "getco-vidyut-sahayak-je-2026",
+    "advtNo": "GETCO/HR/2026/02",
+    "agency": "POWER_CORP",
+    "agencyFull": "Gujarat Energy Transmission Corporation Limited (GETCO)",
+    "title": "Vidyut Sahayak (Junior Engineer - Electrical & Civil)",
+    "titleGuj": "વિદ્યુત સહાયક (જુનિયર એન્જિનિયર - ઇલેક્ટ્રિકલ અને સિવિલ)",
+    "vacancies": 460,
+    "publishedDate": "2026-09-20",
+    "closingDate": "2026-10-28",
+    "daysLeft": 11,
+    "lastVerified": "11 Oct 2026, 15:40 IST",
+    "officialBoardUrl": "https://getco.co.in",
+    "officialApplyUrl": "https://www.getcogujarat.com",
+    "minAge": 21,
+    "maxAgeBase": 35,
+    "requiredEdu": [
+      "TECH_DIPLOMA",
+      "GRADUATE"
+    ],
+    "eduSummaryEn": "B.E. / B.Tech (Electrical / Civil) with minimum 55% marks from AICTE approved institute.",
+    "eduSummaryGuj": "AICTE માન્ય સંસ્થામાંથી ઓછામાં ઓછા ૫૫% ગુણ સાથે B.E. / B.Tech (ઇલેક્ટ્રિકલ/સિવિલ).",
+    "feeSummary": "₹500 for General/SEBC/EWS. ₹250 for SC/ST.",
+    "publication_status": "published",
+    "version": 1
+  },
+  {
+    "id": "gpsc-sti-state-tax-inspector-2026",
+    "advtNo": "GPSC/202627/08",
+    "agency": "GPSC",
+    "agencyFull": "Gujarat Public Service Commission (ગુજરાત જાહેર સેવા આયોગ)",
+    "title": "State Tax Inspector (STI) Class 3",
+    "titleGuj": "રાજ્ય વેરા નિરીક્ષક (સ્ટેટ ટેક્સ ઇન્સ્પેક્ટર - STI) વર્ગ-૩",
+    "vacancies": 520,
+    "publishedDate": "2026-10-08",
+    "closingDate": "2026-11-10",
+    "daysLeft": 24,
+    "lastVerified": "14 Oct 2026, 17:00 IST",
+    "officialBoardUrl": "https://gpsc.gujarat.gov.in",
+    "officialApplyUrl": "https://gpsc-ojas.gujarat.gov.in",
+    "minAge": 20,
+    "maxAgeBase": 35,
+    "requiredEdu": [
+      "GRADUATE",
+      "COMMERCE_PG"
+    ],
+    "eduSummaryEn": "Bachelor degree in any discipline from recognized university.",
+    "eduSummaryGuj": "કોઈપણ શાખામાં સ્નાતકની પદવી.",
+    "feeSummary": "₹100 for General. Free for Reserved & Women candidates.",
+    "publication_status": "published",
+    "version": 2,
+    "corrigenda": [
+      {
+        "corrId": "corr-gpsc-sti-01",
+        "date": "12 Oct 2026",
+        "category": "VACANCY",
+        "type": "State Tax Inspector Total Vacancies Increased from 460 to 520 (+60 Posts)",
+        "sectionCitation": "GPSC Corrigendum Notice #1/2026-27, Appendix 1",
+        "beforeText": "Total Vacancies: 460 Posts",
+        "afterText": "Total Vacancies: 520 Posts (Unreserved 220, SEBC 140, EWS 52, SC 36, ST 72)",
+        "summaryGuj": "સ્ટેટ ટેક્સ ઇન્સ્પેક્ટરની જગ્યાઓમાં વધારો: ૪૬૦ થી વધીને ૫૨૦ (+૬૦ નવી જગ્યાઓ)"
+      }
+    ]
+  },
+  {
+    "id": "gpsc-medical-officer-class2-2026",
+    "advtNo": "GPSC/202627/14",
+    "agency": "GPSC",
+    "agencyFull": "Gujarat Public Service Commission (GPSC)",
+    "title": "Medical Officer (Gujarat Public Health Service Class 2)",
+    "titleGuj": "તબીબી અધિકારી (ગુજરાત જાહેર આરોગ્ય સેવા વર્ગ-૨)",
+    "vacancies": 1890,
+    "publishedDate": "2026-10-01",
+    "closingDate": "2026-11-12",
+    "daysLeft": 26,
+    "lastVerified": "15 Oct 2026, 14:30 IST",
+    "officialBoardUrl": "https://gpsc.gujarat.gov.in",
+    "officialApplyUrl": "https://gpsc-ojas.gujarat.gov.in",
+    "minAge": 21,
+    "maxAgeBase": 35,
+    "requiredEdu": [
+      "NURSING",
+      "GRADUATE"
+    ],
+    "eduSummaryEn": "MBBS Degree and valid registration with Gujarat Medical Council (GMC).",
+    "eduSummaryGuj": "MBBS ની ડિગ્રી અને ગુજરાત મેડિકલ કાઉન્સિલ (GMC) નું કાયમી રજીસ્ટ્રેશન.",
+    "feeSummary": "₹100 for General. Exempted for others.",
+    "publication_status": "published",
+    "version": 2
+  },
+  {
+    "id": "gpssb-gram-sevak-2026",
+    "advtNo": "GPSSB/202627/15",
+    "agency": "GPSSB",
+    "agencyFull": "Gujarat Panchayat Service Selection Board (પંચાયત પસંદગી મંડળ)",
+    "title": "Gram Sevak (Agricultural Extension Officer Class 3)",
+    "titleGuj": "ગ્રામ સેવક (કૃષિ વિસ્તરણ અધિકારી વર્ગ-૩)",
+    "vacancies": 1571,
+    "publishedDate": "2026-10-15",
+    "closingDate": "2026-11-28",
+    "daysLeft": 42,
+    "lastVerified": "16 Oct 2026, 18:20 IST",
+    "officialBoardUrl": "https://gpssb.gujarat.gov.in",
+    "officialApplyUrl": "https://ojas.gujarat.gov.in",
+    "minAge": 18,
+    "maxAgeBase": 36,
+    "requiredEdu": [
+      "TECH_DIPLOMA",
+      "GRADUATE"
+    ],
+    "eduSummaryEn": "B.Sc. (Agriculture) / Horticulture or Diploma in Agriculture from AAU/JAU/NAU/SDAU.",
+    "eduSummaryGuj": "માન્ય કૃષિ યુનિવર્સિટીમાંથી B.Sc. (એગ્રીકલ્ચર) / બાગાયત અથવા કૃષિ ડિપ્લોમા.",
+    "feeSummary": "₹100 for General. Free for Reserved candidates.",
+    "publication_status": "published",
+    "version": 1
+  },
+  {
     "id": "gsssb-work-asst-461",
     "advtNo": "GSSSB/202627/461",
     "agency": "GSSSB",
@@ -15,7 +360,10 @@
     "officialApplyUrl": "https://ojas.gujarat.gov.in",
     "minAge": 18,
     "maxAgeBase": 33,
-    "requiredEdu": ["TECH_DIPLOMA", "HSC"],
+    "requiredEdu": [
+      "TECH_DIPLOMA",
+      "HSC"
+    ],
     "eduSummaryEn": "Diploma in Civil Engineering OR HSC (12th) + ITI Surveyor / Construction trade certificate (Page 2, Section 3).",
     "eduSummaryGuj": "સિવિલ એન્જિનિયરિંગ ડિપ્લોમા અથવા ધોરણ-૧૨ પાસ સાથે સર્વેયર/બાંધકામ ITI પ્રમાણપત્ર (સૂચના પાના નં. ૨, વિભાગ ૩).",
     "manualReviewException": "Candidates with B.E. Civil (higher degree without Diploma) or out-of-state ITI certificates require manual equivalence verification under Clause 3.2(B).",
@@ -42,10 +390,30 @@
       "Scanned Photo & Signature in 15 KB JPG format for OJAS upload"
     ],
     "timeline": [
-      { "step": "Official Notification Released", "date": "28 Sep 2026", "status": "done", "cite": "Advt. 461/202627" },
-      { "step": "Corrigendum #1 (Vacancy & Qualification Update)", "date": "12 Oct 2026", "status": "done", "cite": "GSSSB Notice Board" },
-      { "step": "OJAS Online Application & Fee Deadline", "date": "27 Oct 2026 (23:59 IST)", "status": "current", "cite": "Section 8.1" },
-      { "step": "CBRT Preliminary Exam Call Letter (Tentative)", "date": "Dec 2026", "status": "upcoming", "cite": "GSSSB Exam Calendar" }
+      {
+        "step": "Official Notification Released",
+        "date": "28 Sep 2026",
+        "status": "done",
+        "cite": "Advt. 461/202627"
+      },
+      {
+        "step": "Corrigendum #1 (Vacancy & Qualification Update)",
+        "date": "12 Oct 2026",
+        "status": "done",
+        "cite": "GSSSB Notice Board"
+      },
+      {
+        "step": "OJAS Online Application & Fee Deadline",
+        "date": "27 Oct 2026 (23:59 IST)",
+        "status": "current",
+        "cite": "Section 8.1"
+      },
+      {
+        "step": "CBRT Preliminary Exam Call Letter (Tentative)",
+        "date": "Dec 2026",
+        "status": "upcoming",
+        "cite": "GSSSB Exam Calendar"
+      }
     ]
   },
   {
@@ -64,7 +432,12 @@
     "officialApplyUrl": "https://gpsc-ojas.gujarat.gov.in",
     "minAge": 20,
     "maxAgeBase": 35,
-    "requiredEdu": ["GRADUATE", "TECH_DIPLOMA", "NURSING", "COMMERCE_PG"],
+    "requiredEdu": [
+      "GRADUATE",
+      "TECH_DIPLOMA",
+      "NURSING",
+      "COMMERCE_PG"
+    ],
     "eduSummaryEn": "Bachelor's Degree in any discipline from a recognized university. Final-year students appearing in final semester before Mains are eligible (Section 4.1).",
     "eduSummaryGuj": "માન્ય યુનિવર્સિટીમાંથી કોઈપણ વિદ્યાશાખામાં સ્નાતક (Graduate) ડિગ્રી. છેલ્લા સેમેસ્ટરમાં અભ્યાસ કરતા ઉમેદવારો પણ પ્રાથમિક પરીક્ષા માટે અરજી કરી શકે છે (વિભાગ ૪.૧).",
     "manualReviewException": "Final-year degree candidates must produce provisional degree certificate before the Mains application deadline, otherwise candidature is cancelled (Page 4, Note 2).",
@@ -91,10 +464,30 @@
       "₹100 Online Application Fee receipt (if General Male candidate)"
     ],
     "timeline": [
-      { "step": "Detailed Notification Published", "date": "15 Sep 2026", "status": "done", "cite": "Advt. 32/202627" },
-      { "step": "Corrigendum: Deadline Extended by 7 Days", "date": "14 Oct 2026", "status": "done", "cite": "GPSC Notice" },
-      { "step": "Extended Online Application Deadline", "date": "24 Oct 2026", "status": "current", "cite": "gpsc-ojas.gujarat.gov.in" },
-      { "step": "Preliminary Examination (Revised Date)", "date": "10 Jan 2027", "status": "upcoming", "cite": "GPSC Calendar" }
+      {
+        "step": "Detailed Notification Published",
+        "date": "15 Sep 2026",
+        "status": "done",
+        "cite": "Advt. 32/202627"
+      },
+      {
+        "step": "Corrigendum: Deadline Extended by 7 Days",
+        "date": "14 Oct 2026",
+        "status": "done",
+        "cite": "GPSC Notice"
+      },
+      {
+        "step": "Extended Online Application Deadline",
+        "date": "24 Oct 2026",
+        "status": "current",
+        "cite": "gpsc-ojas.gujarat.gov.in"
+      },
+      {
+        "step": "Preliminary Examination (Revised Date)",
+        "date": "10 Jan 2027",
+        "status": "upcoming",
+        "cite": "GPSC Calendar"
+      }
     ]
   },
   {
@@ -113,7 +506,12 @@
     "officialApplyUrl": "https://ojas.gujarat.gov.in",
     "minAge": 18,
     "maxAgeBase": 35,
-    "requiredEdu": ["GRADUATE", "TECH_DIPLOMA", "NURSING", "COMMERCE_PG"],
+    "requiredEdu": [
+      "GRADUATE",
+      "TECH_DIPLOMA",
+      "NURSING",
+      "COMMERCE_PG"
+    ],
     "eduSummaryEn": "For candidates who appeared in GSSSB CCE Prelims: Bank details verification required by 22 Oct 2026 for fee refund; Group-A & B Mains syllabus released.",
     "eduSummaryGuj": "જે ઉમેદવારોએ CCE પ્રાથમિક પરીક્ષા આપી છે તેમણે ફી રિફંડ માટે ૨૨ ઓક્ટોબર ૨૦૨૬ સુધીમાં બેંક વિગતો ચકાસવી ફરજિયાત છે. મુખ્ય પરીક્ષાનો અભ્યાસક્રમ જાહેર થયો છે.",
     "manualReviewException": "Candidates who paid via offline post-office challan or closed their original bank account must submit updated IFSC & account number on the GSSSB portal.",
@@ -139,9 +537,24 @@
       "Save Prelims Score / Merit List PDF for future document verification"
     ],
     "timeline": [
-      { "step": "CCE Prelims Answer Key & Result Published", "date": "13 Oct 2026", "status": "done", "cite": "gsssb.gujarat.gov.in" },
-      { "step": "Fee Refund Bank Details Submission Window", "date": "22 Oct 2026", "status": "current", "cite": "GSSSB Refund Notice" },
-      { "step": "CCE Mains Admit Card Release", "date": "Nov 2026", "status": "upcoming", "cite": "gsssb.cbtexam.in" }
+      {
+        "step": "CCE Prelims Answer Key & Result Published",
+        "date": "13 Oct 2026",
+        "status": "done",
+        "cite": "gsssb.gujarat.gov.in"
+      },
+      {
+        "step": "Fee Refund Bank Details Submission Window",
+        "date": "22 Oct 2026",
+        "status": "current",
+        "cite": "GSSSB Refund Notice"
+      },
+      {
+        "step": "CCE Mains Admit Card Release",
+        "date": "Nov 2026",
+        "status": "upcoming",
+        "cite": "gsssb.cbtexam.in"
+      }
     ]
   },
   {
@@ -160,7 +573,13 @@
     "officialApplyUrl": "https://ojas.gujarat.gov.in",
     "minAge": 18,
     "maxAgeBase": 33,
-    "requiredEdu": ["HSC", "GRADUATE", "TECH_DIPLOMA", "NURSING", "COMMERCE_PG"],
+    "requiredEdu": [
+      "HSC",
+      "GRADUATE",
+      "TECH_DIPLOMA",
+      "NURSING",
+      "COMMERCE_PG"
+    ],
     "eduSummaryEn": "12th Pass (HSC) for Lokrakshak (LRD) Constable posts; Bachelor's Degree required for Sub-Inspector (PSI) cadre (Section 2.1).",
     "eduSummaryGuj": "લોકરક્ષક (LRD) માટે ધોરણ-૧૨ (HSC) પાસ અને PSI કેડર માટે સ્નાતક (Graduate) ડિગ્રી ફરજિયાત છે (વિભાગ ૨.૧).",
     "manualReviewException": "Physical Standard Requirements apply: Minimum height (165 cm General/SEBC Male, 162 cm ST Male; 155 cm General/SEBC Female, 150 cm ST Female) and chest expansion rules must be checked manually.",
@@ -186,9 +605,24 @@
       "Valid Driving License / Computer CCC certificate details ready"
     ],
     "timeline": [
-      { "step": "Addendum Application Window Opened", "date": "01 Oct 2026", "status": "done", "cite": "ojas.gujarat.gov.in" },
-      { "step": "Online Application Closing Date", "date": "30 Oct 2026", "status": "current", "cite": "GPRB Notice" },
-      { "step": "Physical Efficiency Test (PET/PST) Call Letters", "date": "Nov / Dec 2026", "status": "upcoming", "cite": "GPRB Schedule" }
+      {
+        "step": "Addendum Application Window Opened",
+        "date": "01 Oct 2026",
+        "status": "done",
+        "cite": "ojas.gujarat.gov.in"
+      },
+      {
+        "step": "Online Application Closing Date",
+        "date": "30 Oct 2026",
+        "status": "current",
+        "cite": "GPRB Notice"
+      },
+      {
+        "step": "Physical Efficiency Test (PET/PST) Call Letters",
+        "date": "Nov / Dec 2026",
+        "status": "upcoming",
+        "cite": "GPRB Schedule"
+      }
     ]
   },
   {
@@ -207,7 +641,9 @@
     "officialApplyUrl": "https://ojas.gujarat.gov.in",
     "minAge": 18,
     "maxAgeBase": 40,
-    "requiredEdu": ["NURSING"],
+    "requiredEdu": [
+      "NURSING"
+    ],
     "eduSummaryEn": "B.Sc. Nursing or GNM Diploma with active Gujarat Nursing Council (GNC) registration (for Staff Nurse); B.Sc. Chemistry/Microbiology (for Lab Asst).",
     "eduSummaryGuj": "B.Sc. નર્સિંગ અથવા GNM ડિપ્લોમા સાથે ગુજરાત નર્સિંગ કાઉન્સિલ (GNC) નું રજીસ્ટ્રેશન ફરજિયાત છે.",
     "manualReviewException": "Provisional GNC registration renewal receipt is accepted at application stage ONLY if original renewal certificate is produced at document verification (Corrigendum Clause 4.B).",
@@ -232,9 +668,24 @@
       "OJAS OTR Profile & Category Certificate verification"
     ],
     "timeline": [
-      { "step": "Notification Published on OJAS", "date": "25 Sep 2026", "status": "done", "cite": "Advt. 458/202627" },
-      { "step": "GNC Renewal Relaxation & Hall Ticket Notice", "date": "16 Oct 2026", "status": "done", "cite": "gsssb.gujarat.gov.in" },
-      { "step": "Last Date for Online Application", "date": "25 Oct 2026", "status": "current", "cite": "ojas.gujarat.gov.in" }
+      {
+        "step": "Notification Published on OJAS",
+        "date": "25 Sep 2026",
+        "status": "done",
+        "cite": "Advt. 458/202627"
+      },
+      {
+        "step": "GNC Renewal Relaxation & Hall Ticket Notice",
+        "date": "16 Oct 2026",
+        "status": "done",
+        "cite": "gsssb.gujarat.gov.in"
+      },
+      {
+        "step": "Last Date for Online Application",
+        "date": "25 Oct 2026",
+        "status": "current",
+        "cite": "ojas.gujarat.gov.in"
+      }
     ]
   },
   {
@@ -253,7 +704,12 @@
     "officialApplyUrl": "https://hc-ojas.gujarat.gov.in",
     "minAge": 18,
     "maxAgeBase": 35,
-    "requiredEdu": ["GRADUATE", "TECH_DIPLOMA", "NURSING", "COMMERCE_PG"],
+    "requiredEdu": [
+      "GRADUATE",
+      "TECH_DIPLOMA",
+      "NURSING",
+      "COMMERCE_PG"
+    ],
     "eduSummaryEn": "Graduate in any discipline from a recognized University + basic computer knowledge certificate (Section 3.A).",
     "eduSummaryGuj": "કોઈપણ વિદ્યાશાખામાં સ્નાતક (Graduate) અને કોમ્પ્યુટર અંગેનું પાયાનું જ્ઞાન ધરાવતું પ્રમાણપત્ર (વિભાગ ૩.A).",
     "manualReviewException": "High Court uses HC-OJAS (separate from standard OJAS OTR) and SBI e-Pay for fee payment. Ensure you apply on hc-ojas.gujarat.gov.in.",
@@ -268,9 +724,24 @@
       "SBI e-Pay Payment Receipt print"
     ],
     "timeline": [
-      { "step": "Official High Court Notification Released", "date": "01 Oct 2026", "status": "done", "cite": "hc-ojas.gujarat.gov.in" },
-      { "step": "Online Application Closing Date", "date": "05 Nov 2026", "status": "current", "cite": "Section 7" },
-      { "step": "Elimination Test (Objective MCQs)", "date": "Jan 2027", "status": "upcoming", "cite": "Section 9" }
+      {
+        "step": "Official High Court Notification Released",
+        "date": "01 Oct 2026",
+        "status": "done",
+        "cite": "hc-ojas.gujarat.gov.in"
+      },
+      {
+        "step": "Online Application Closing Date",
+        "date": "05 Nov 2026",
+        "status": "current",
+        "cite": "Section 7"
+      },
+      {
+        "step": "Elimination Test (Objective MCQs)",
+        "date": "Jan 2027",
+        "status": "upcoming",
+        "cite": "Section 9"
+      }
     ]
   },
   {
@@ -289,7 +760,12 @@
     "officialApplyUrl": "https://ojas.gujarat.gov.in",
     "minAge": 18,
     "maxAgeBase": 33,
-    "requiredEdu": ["GRADUATE", "TECH_DIPLOMA", "NURSING", "COMMERCE_PG"],
+    "requiredEdu": [
+      "GRADUATE",
+      "TECH_DIPLOMA",
+      "NURSING",
+      "COMMERCE_PG"
+    ],
     "eduSummaryEn": "Bachelor's Degree (Graduate) in any stream as per revised Panchayat Service Class-3 recruitment rules + CCC Computer qualification.",
     "eduSummaryGuj": "સુધારેલા પંચાયત સેવા વર્ગ-૩ નિયમો મુજબ તલાટી અને જુનિયર ક્લાર્ક માટે હવે સ્નાતક (Graduate) ડિગ્રી ફરજિયાત કરવામાં આવી છે.",
     "manualReviewException": "Important Rule Change: Earlier 12th-pass eligibility for Talati has been upgraded to Graduate level via Panchayat Dept Gazette Notification. Check district preference declaration rules.",
@@ -315,9 +791,24 @@
       "Mandatory Exam Consent Form (સંમતિ પત્રક) reminder set"
     ],
     "timeline": [
-      { "step": "GPSSB Notification Published on OJAS", "date": "02 Oct 2026", "status": "done", "cite": "Advt. 18/202627" },
-      { "step": "District Roster Corrigendum Issued", "date": "11 Oct 2026", "status": "done", "cite": "GPSSB Notice" },
-      { "step": "Online Application Closing Date", "date": "02 Nov 2026", "status": "current", "cite": "ojas.gujarat.gov.in" }
+      {
+        "step": "GPSSB Notification Published on OJAS",
+        "date": "02 Oct 2026",
+        "status": "done",
+        "cite": "Advt. 18/202627"
+      },
+      {
+        "step": "District Roster Corrigendum Issued",
+        "date": "11 Oct 2026",
+        "status": "done",
+        "cite": "GPSSB Notice"
+      },
+      {
+        "step": "Online Application Closing Date",
+        "date": "02 Nov 2026",
+        "status": "current",
+        "cite": "ojas.gujarat.gov.in"
+      }
     ]
   },
   {
@@ -336,7 +827,11 @@
     "officialApplyUrl": "https://www.dgvcl.com",
     "minAge": 18,
     "maxAgeBase": 30,
-    "requiredEdu": ["GRADUATE", "TECH_DIPLOMA", "COMMERCE_PG"],
+    "requiredEdu": [
+      "GRADUATE",
+      "TECH_DIPLOMA",
+      "COMMERCE_PG"
+    ],
     "eduSummaryEn": "Full-time B.A. / B.Com / B.Sc. / B.C.A. / B.B.A. with 55% marks for Jr. Assistant; Full-time B.E./B.Tech Electrical for Jr. Engineer (Section 2).",
     "eduSummaryGuj": "જુનિયર આસિસ્ટન્ટ માટે ૫૫% સાથે રેગ્યુલર સ્નાતક (BA/BCom/BSc/BCA/BBA) અને જુનિયર ઈજનેર માટે B.E. Electrical ફરજિયાત છે.",
     "manualReviewException": "Distance learning / External degree candidates are NOT eligible under GUVNL/DGVCL rules (Clause 2.4). Base upper age is 30 yrs for Jr. Assistant.",
@@ -362,9 +857,24 @@
       "SEBC Non-Creamy Layer / EWS Certificate valid for current financial year"
     ],
     "timeline": [
-      { "step": "DGVCL Online Portal Opened", "date": "05 Oct 2026", "status": "done", "cite": "dgvcl.com" },
-      { "step": "CGPA Conversion Addendum", "date": "14 Oct 2026", "status": "done", "cite": "Clause 2.6" },
-      { "step": "Online Application Closing Date", "date": "29 Oct 2026", "status": "current", "cite": "dgvcl.com" }
+      {
+        "step": "DGVCL Online Portal Opened",
+        "date": "05 Oct 2026",
+        "status": "done",
+        "cite": "dgvcl.com"
+      },
+      {
+        "step": "CGPA Conversion Addendum",
+        "date": "14 Oct 2026",
+        "status": "done",
+        "cite": "Clause 2.6"
+      },
+      {
+        "step": "Online Application Closing Date",
+        "date": "29 Oct 2026",
+        "status": "current",
+        "cite": "dgvcl.com"
+      }
     ]
   },
   {
@@ -383,7 +893,10 @@
     "officialApplyUrl": "https://www.suratmunicipal.gov.in/Information/Recruitment",
     "minAge": 18,
     "maxAgeBase": 35,
-    "requiredEdu": ["GRADUATE", "TECH_DIPLOMA"],
+    "requiredEdu": [
+      "GRADUATE",
+      "TECH_DIPLOMA"
+    ],
     "eduSummaryEn": "Graduate in any stream for Senior Clerk; Diploma/Degree Civil/Electrical for Additional Assistant Engineer (SMC Recruitment Cell Notice).",
     "eduSummaryGuj": "Senior Clerk: Graduate; Assistant Engineer: Civil/Electrical Diploma or Degree.",
     "manualReviewException": "SMC uses its own online recruitment portal (suratmunicipal.gov.in) rather than state OJAS, though Citizen/OTR profile creation on SMC website is required.",
@@ -409,9 +922,24 @@
       "CCC Certificate & Valid Category Certificate"
     ],
     "timeline": [
-      { "step": "SMC Notification Published", "date": "08 Oct 2026", "status": "done", "cite": "SMC/PRO/2026/114" },
-      { "step": "Corrigendum: +40 Clerk Vacancies Added", "date": "15 Oct 2026", "status": "done", "cite": "SMC Recruitment Cell" },
-      { "step": "Last Date for Online Application", "date": "08 Nov 2026", "status": "current", "cite": "suratmunicipal.gov.in" }
+      {
+        "step": "SMC Notification Published",
+        "date": "08 Oct 2026",
+        "status": "done",
+        "cite": "SMC/PRO/2026/114"
+      },
+      {
+        "step": "Corrigendum: +40 Clerk Vacancies Added",
+        "date": "15 Oct 2026",
+        "status": "done",
+        "cite": "SMC Recruitment Cell"
+      },
+      {
+        "step": "Last Date for Online Application",
+        "date": "08 Nov 2026",
+        "status": "current",
+        "cite": "suratmunicipal.gov.in"
+      }
     ]
   }
 ]

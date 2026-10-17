@@ -591,5 +591,14 @@ export const GUJARAT_VERIFIED_JOBS: Job[] = [
   },
 ];
 
-// Export as DEMO_JOBS for backward compatibility
-export const DEMO_JOBS: Job[] = GUJARAT_VERIFIED_JOBS;
+import { V2_GUJARAT_RECRUITMENTS } from './v2Recruitments';
+
+// Combined database containing all verified recruitments (v2 + v1)
+export const ALL_VERIFIED_JOBS: Job[] = [
+  ...V2_GUJARAT_RECRUITMENTS,
+  ...GUJARAT_VERIFIED_JOBS.filter((j) => !V2_GUJARAT_RECRUITMENTS.some((v) => v.id === j.id)),
+];
+
+// Export as DEMO_JOBS for full backward compatibility across all components
+export const DEMO_JOBS: Job[] = ALL_VERIFIED_JOBS;
+
